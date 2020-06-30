@@ -110,9 +110,9 @@ $(document).ready(function () {
     });
 
 
-    // RENDU ICI comment détecter les changements sur la timeline?
+    // #RENDU ICI comment détecter les changements sur la timeline?
     timeline.on('groupDragged', function () {
-        alert("GOURPASDRADDED");
+        console.log("groupDragged");
     })
 
 

@@ -310,7 +310,7 @@ header {
   background-color: #ede7f4;
   display: flex;
   justify-content: space-between;
-  height: 7rem;
+  min-height: 7rem;
   font-size: 1.6rem
 }
 
@@ -334,8 +334,9 @@ main {
 nav {
   background-color: rgba(17, 125, 236, .9);
   border-bottom: 2px solid black;
-  display: flex;
   font-size: 2rem;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   transition: .5s ease-in-out;
   width: 100%

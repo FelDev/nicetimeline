@@ -273,9 +273,10 @@ function startNewTimeline() {
 }
 
 window.onbeforeunload = function () {
-  if (changesSaved) {
-    ;
-  } else {
-    return "Vos dernières modifications n'ont pas été enregistré.";
-  }
+  // if (changesSaved) {
+  //   ;
+  // } else {
+  //   return "Vos dernières modifications n'ont pas été enregistré.";
+  // }
 };
+
