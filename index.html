@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Clickjacking Protection-->
+  <script type="text/javascript">
+    if (top != self) top.location.replace(self.location.href); 
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple Timeline</title>
+  <link rel="shortcut icon" href="image/favicon.ico">
+  <link href="css/librairies/vis.css" rel="stylesheet" type="text/css" />
+  <!-- <link href="css/librairies/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" /> -->
+  <link rel="stylesheet" type="text/css" href="css/editmode.css" />
+  <link href="css/librairies/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+  <script src="js/librairies/jquery.min.js"></script>
+  <script src="js/librairies/jquery-ui.min.js"></script>
+  <script src="js/librairies/vis.js"></script>
+  <!-- <script src="js/librairies/vis-timeline-graph2d.min.js"></script> -->
+  <script src="js/timelinebasic.js"></script>
+  <script src="js/editmodesetup.js"></script>
+  <script src="js/editmode.js"></script>
+  <script src="js/savenewtimeline.js"></script>
+  <script src="js/dateformatchecker.js"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Simple Timeline</h1>
+    <h2 title="Changer le titre">Titre de la timeline</h2>
+    <div>
+      <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
+      <button id="btnShare">Partager</button>
+      <form action="account.php" method="GET">
+        <button name="action">Déconnexion</button>
+      </form> -->
+    </div>
+  </header>
+  <nav>
+    <!-- Les liens du nav appel la fonction changeMenu pour enlever ledit menu une fois qu'on se fait rediriger (sur mobile)-->
+    <!-- <a href="account.php">
+      Toutes mes timelines
+    </a>
+    <a href="#">
+      Créer une nouvelle timeline
+    </a>
+    <a href="account.php">
+      Gestion du compte
+    </a> -->
+
+    <button onclick="startNewTimeline()">New timeline</button>
+    <button onclick="toggleImporter()">Import timeline</button>
+    <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+      <button onclick="toggleImporter()">x</button>
+      <p>Drag one or more files to this Drop Zone ...</p>
+      <!-- <input type="file"> -->
+    </div>
+    <button onclick="exportTimeline()" >Export timeline</button>
+    <a id="exportTimeline" style="display: none;">Export timeline</a>
+    
+  </nav>
+  <main>
+    <div class="dateIndicator" title="Modifier la date de début de la timeline">27-07-1991</div>
+    <div class="dateIndicator" title="Modifier la date de fin de la timeline">27-07-2091</div>
+    <p id="description" title="Changer la description"></p>
+
+
+    <div id=btnContainer>
+      <div>
+        <button id="btnAddLine">Ajouter une ligne</button>
+        <button id="btnMoveToFirstItem">Aller au premier élément</button>
+        <button id="btnShowAllLine">Afficher toutes les lignes</button>
+        <button id="btnAutoScroll">Faire défiler</button>
+        <button id="btnSave">Sauvegarder la timeline</button>
+      </div>
+      <button id="btnHelp">?</button>
+    </div>
+
+    <div id="modalHelp" title="?">
+      <p>VOUS DEVEZ SAUVEGARDER VOTRE TIMELINE SI VOUS VOULEZ CONSERVER VOS CHANGEMENTS.</p>
+      <p>Vous pouvez dragger les événement et changer leurs durée.</p>
+      <p>Double cliquez sur la timeline pour un "zoom out parfait".</p>
+      <p>Double cliquez sur un événement pour afficher sa description.</p>
+      <p>Faites un clic droit sur la timeline pour ajouter un événement.</p>
+      <p>Faites un clic droit sur un événement pour le modifier.</p>
+      <p>Changez l'ordre des lignes en les draggant une à la fois.</p>
+      <p>Amenez votre curseur en dehors de la timeline pour faire défiler la page.</p>
+      <p>Les dates de début et de fin de votre timeline sont affichées en haut et sont modifiables.</p>
+      <p>Cliquez sur le titre pour le modifier.</p>
+      <p>Cliquez sur la description pour la modifier.</p>
+
+    </div>
+
+    <div id="modalAddEvent" title="Ajouter un item">
+      <p>Titre: <input type="text" id="newEventTitle"></p>
+      <p>Description: <textarea type="text" id="newEventDesc" placeholder="(optionnel)"></textarea></p>
+      <p>Couleur: <select id="newEventColor">
+          <option value="default">Bleu</option>
+          <option value="red">Rouge</option>
+          <option value="green">Vert</option>
+          <option value="orange">Orange</option>
+          <option value="magenta">Magenta</option>
+          <option value="black">Noir</option>
+          <option value="white">Blanc</option>
+        </select></p>
+      <p>Date de début: <input type="text" id="datePickerStart"></p>
+      <p>Date de fin: <input type="text" id="datePickerEnd"></p>
+      <p></p>
+    </div>
+    <div id="modalAddLine" title="Ajouter une ligne">
+      <p>Nom de la ligne: <input type="text" id="lineName"></p>
+      <!-- Positionnement de la nouvelle ligne: <input type="text" id="newLineOrder"> -->
+      <p></p>
+    </div>
+    <div id="modalChangeEndDate" title="Spécifier une date de fin">
+      <p>Date de fin: <input type="text" id="datePickerTimelineEnd"></p>
+      <p></p>
+    </div>
+    <div id="modalChangeStartDate" title="Spécifier une date de début">
+      <p>Date de début: <input type="text" id="datePickerTimelineStart"></p>
+      <p></p>
+    </div>
+    <div id="modalEditEvent" title="Modifier un item">
+      <p>Titre: <input type="text" id="editedEventTitle"></p>
+      <p>Description: <textarea type="text" id="editedEventDescription"></textarea></p>
+      <p>Couleur: <select id="editedEventColor">
+          <option value="default">Bleu</option>
+          <option value="red">Rouge</option>
+          <option value="green">Vert</option>
+          <option value="orange">Orange</option>
+          <option value="magenta">Magenta</option>
+          <option value="black">Noir</option>
+          <option value="white">Blanc</option>
+        </select></p>
+      <p>Date de début: <input type="text" id="editedEventDatePickerStart"></p>
+      <p>Date de fin: <input type="text" id="editedEventDatePickerEnd"></p>
+      <p></p>
+    </div>
+    <div id="modalEditLine" title="Renommer ou supprimer cette ligne">
+      <p>Nouveau nom pour la ligne: <input type="text" id="newLineName"></p>
+      <p></p>
+    </div>
+    <div id="modalInfoItem" title="">
+      <p></p>
+      <!-- Éventuellement il faudrait un img tag ici, quand on aura des images... -->
+    </div>
+    <div id="modalNewTimeline" title="Créer une nouvelle Timeline">
+      <p>Titre: <input type="text" id="newTimelineName"></p>
+      <p>Date de début: <input type="text" id="newTimelineDatePickerStart"></p>
+      <p>Date de fin: <input type="text" id="newTimelineDatePickerEnd"></p>
+      <p>Description: <textarea rows="4" cols="50" type="text" id="newTimelineDescription"></textarea>
+      <p></p>
+    </div>
+    <div id="modalNewTimelineSaveFirst" title="Créer une nouvelle Timeline">
+      <p>Voulez-vous sauvegarder cette timeline d'abord?</p>
+
+    </div>
+    <div id="modalRemoveLine" title="Voulez-vous supprimer cette ligne?">
+      <p>Si confirmer votre choix, la ligne ainsi que tous ses événements seront supprimés.</p>
+      <p>Aller de l'avant?</p>
+    </div>
+    <div id="modalQuickAlert">
+      <p></p>
+    </div>
+
+    <!-- Le plus important des div!!! -->
+    <div id="timeline" oncontextmenu="return false;"></div>
+
+  </main>
+  <footer>
+    © <a href="http://felixparadis.com/">Félix Paradis</a>
+  </footer>
+</body>
+
+</html>
