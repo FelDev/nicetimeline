@@ -123,7 +123,9 @@ function dragOverHandler(ev) {
 function clearTimeline() {
   for (let key in timeline.groupsData._data._data) {
     let obj = timeline.groupsData._data._data[key];
-    group.remove({ id: obj.id });
+    group.remove({
+      id: obj.id
+    });
     lineCount--;
   }
 }
@@ -156,7 +158,7 @@ function loadTimeline(info) {
       visible: true
     });
     // Faire le tour de toutes les périodes, pour chaque ligne
-      line.allPeriod.forEach(function (period) {
+    line.allPeriod.forEach(function (period) {
       if (!period.start_date) {
         console.log('@period: ', period);
         
@@ -272,6 +274,12 @@ function startNewTimeline() {
   clearTimeline()
 }
 
+function showDemoTimeline() {
+
+  loadTimeline(
+    {"id":"42","version":1,"description":"I use this timeline to reflect on how I've spent my time and how I will spend what's left.","name":"John Doe's life","public":true,"start_date":"2000-01-01","end_date":"2030-07-02","line":[{"name":"Adress","order":"0","id":0,"allPeriod":[{"name":"123 Fake street","description":"","color":"green","start_date":"2000-01-01","end_date":"2008-08-22","group":0},{"name":"456 famous avenue","description":"With my good friends Snoop Dogg and Mr. Quaker.","color":"default","start_date":"2008-08-23T00:00:00.000Z","end_date":"2010-07-27T23:58:18.814Z","group":0},{"name":"789 college boulevard","description":"That was nice","color":"default","start_date":"2016-02-05T13:14:32.459Z","end_date":"2018-10-10T20:03:33.622Z","group":0},{"name":"666 elm Street","description":"That was a little spooky","color":"default","start_date":"2010-08-06T00:18:26.309Z","end_date":"2014-04-26T04:55:00.939Z","group":0}]},{"name":"school","order":"2","id":1,"allPeriod":[{"name":"High School","description":"","color":"default","start_date":"2009-06-26T09:13:05.864Z","end_date":"2014-04-25T09:13:05.864Z","group":1},{"name":"Primary School","description":"","color":"default","start_date":"2003-11-24T04:52:38.928Z","end_date":"2009-03-07T04:52:38.928Z","group":1},{"name":"College","description":"ATM Prod","color":"default","start_date":"2016-02-15T19:29:56.639Z","end_date":"2018-10-21T19:29:56.639Z","group":1}]},{"name":"Work","order":"3","id":2,"allPeriod":[{"name":"Joe's Garage","description":"BusBoy","color":"default","start_date":"2006-04-16T10:25:24.916Z","end_date":"2008-07-13T01:23:36.837Z","group":2},{"name":"Evil Corp","description":"Assistant-Cuisinier","color":"default","start_date":"2018-06-06T13:42:59.089Z","end_date":"2020-10-03T19:41:54.737Z","group":2}]},{"name":"Traveling","order":"4","id":3,"allPeriod":[{"name":"Gap Year in Canada","description":"Full BackPack, full solo.","color":"default","start_date":"2014-05-25T11:49:01.753Z","end_date":"2016-02-27T18:20:44.441Z","group":3}]}]}
+  )
+}
 window.onbeforeunload = function () {
   // if (changesSaved) {
   //   ;
@@ -279,4 +287,3 @@ window.onbeforeunload = function () {
   //   return "Vos dernières modifications n'ont pas été enregistré.";
   // }
 };
-

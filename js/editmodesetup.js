@@ -32,7 +32,7 @@ $(document).ready(function () {
             // Cacher une ligne se fait via btnHide
             let btnHide = document.createElement('button');
             btnHide.innerHTML = '-';
-            btnHide.title = "Cacher cette ligne";
+            btnHide.title = "Hide this line";
             btnHide.style.fontSize = 'small';
             btnHide.addEventListener('click', function () {
                 hideGroup(group.id);
