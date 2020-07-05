@@ -58,7 +58,7 @@
     <button onclick="toggleImporter()">Import timeline</button>
     <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
       <button onclick="toggleImporter()">x</button>
-      <p>Drag a timeline file here</p>
+      <p>Drag and drop a timeline file here</p>
       <!-- <input type="file"> -->
     </div>
     <button onclick="exportTimeline()" >Export timeline</button>
@@ -83,7 +83,7 @@
     </div>
 
     <div id="modalHelp" title="?">
-      <!-- <h1>What is simple timeline's goal?</h1> -->
+      <h2>What's Simple Timeline?</h2>
       <p>
         The goal of this webapp is to help you visualize the passing of time.
         I use it to visualize my life, but you could make a timeline about anything.
@@ -107,6 +107,18 @@
         Use the green "+" button or right click on the timeline 
       </p>
       <p>
+        <span class="push-left">- To edit events: <br> </span>
+        Right click on them. You can also drag them around.
+      </p>
+      <p>
+        <span class="push-left">- To move lines up and down: <br> </span>
+        Click on a line's name and drag it up or down.
+      </p>
+      <p>
+        <span class="push-left">- To change a timeline's name, description or start/end date: <br> </span>
+        Click on what you want to change.
+      </p>
+      <p>
         <span class="push-left">- To save your timeline: <br> </span>
         Click "Export timeline" and keep the file somewhere safe.
       </p>
@@ -114,13 +126,14 @@
         <span class="push-left">- To load a saved timeline: <br> </span>
         Click "Import timeline" and drag and drop the file you previously exported.
       </p>
+      <!-- <p>
+        <span class="push-left">- : <br> </span>
+        
+      </p> -->
+      <hr>
       <p>
-        <span class="push-left">- To change a timeline's name, description or start/end date: <br> </span>
-        Click on what you want to change.
-      </p>
-      <p>
-        <span class="push-left">- For questions, comments, feature requests and insults: <br> </span>
-        <a href="https://www.felixparadis.com/contact/">Reach out to me</a>
+        For questions, comments, feature requests and insults,
+        <a href="https://www.felixparadis.com/contact/">Reach out to me.</a>
       </p>
       <!-- <p>VOUS DEVEZ SAUVEGARDER VOTRE TIMELINE SI VOUS VOULEZ CONSERVER VOS CHANGEMENTS.</p>
       <p>Vous pouvez dragger les événement et changer leurs durée.</p>
