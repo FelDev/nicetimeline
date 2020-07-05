@@ -97,8 +97,8 @@ $(document).ready(function () {
                 $("#editedEventDatePickerEnd").val(itemEdited.end);
             }
             else {
-                let start = makeValid(itemEdited.start);
-                let end = makeValid(itemEdited.end);
+                let start = makeValid(new Date(itemEdited.start));
+                let end = makeValid(new Date(itemEdited.end));
                 $("#editedEventDatePickerStart").val(start);
                 $("#editedEventDatePickerEnd").val(end);
             }
@@ -403,6 +403,7 @@ $(document).ready(function () {
     $('#btnHelp').on('click', function () {
         $("#modalHelp").dialog("open");
     });
+    var winH = $(window).height();
 
     $("#modalHelp").dialog({
         autoOpen: false,
@@ -412,7 +413,12 @@ $(document).ready(function () {
             }
         },
         minHeight: 200,
-        minWidth: 600
+        minWidth: 666,
+        width: '90vw',
+        height: winH,
+        open: function () {
+            $(this).scrollTop(0);
+        }
     });
 
     $("#modalInfoItem").dialog({
