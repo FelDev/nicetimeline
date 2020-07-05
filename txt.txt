@@ -1,0 +1,17 @@
+# Why export and import a file? 
+
+I chose that way of saving timelines rather than a classic account creation flow for maximal privacy.
+
+The first version of this webapp had users creating accounts and saving their data to a database, but virtually 100% of people had the same concern: "You will be able to see my timeline?". Indeed, I can hack my own websites quite easily.
+
+At first I thought about adding client-side encryption, but, for users, that's about as complex and inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would have to look through the code.
+
+With export/import of a simple .json file, you can turn your internet connection off and disable all cookies while using the app. It still works and nobody, not even me, *can* peek at your data.
+
+On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to host. (So cheap, this is free to use. (But you can make a donation if you want, much appreciated! (And you might be on the shoutout page, if you choose to.)))
+
+If you would enjoy the ability to create an account and save your data on the cloud, do send a feature request!
+
+# What if this goes down?
+
+My promise to you: if ever this goes down, I will notify anyone who wants to be notified and provide instructions on how to host this yourself for free. To be notified, sign up here.
