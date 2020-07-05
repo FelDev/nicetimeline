@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <!-- Clickjacking Protection-->
@@ -32,7 +32,7 @@
 
   <header>
     <h1>Simple Timeline</h1>
-    <h2 title="Changer le titre">Titre de la timeline</h2>
+    <h2 title="Change the Title">Timeline's title</h2>
     <div>
       <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
       <button id="btnShare">Partager</button>
@@ -58,7 +58,7 @@
     <button onclick="toggleImporter()">Import timeline</button>
     <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
       <button onclick="toggleImporter()">x</button>
-      <p>Drag one or more files to this Drop Zone ...</p>
+      <p>Drag a timeline file here</p>
       <!-- <input type="file"> -->
     </div>
     <button onclick="exportTimeline()" >Export timeline</button>
@@ -66,16 +66,16 @@
     
   </nav>
   <main>
-    <div class="dateIndicator" title="Modifier la date de début de la timeline">01-01-2000</div>
-    <div class="dateIndicator" title="Modifier la date de fin de la timeline">31-12-2099</div>
-    <p id="description" title="Changer la description"></p>
+    <div class="dateIndicator" title="Change the timeline's Start Date">01-01-2000</div>
+    <div class="dateIndicator" title="Change the timeline's End Date">31-12-2099</div>
+    <p id="description" title="Change the description"></p>
 
 
     <div id=btnContainer>
       <div>
         <button id="btnAddLine">Add a line</button>
-        <button id="btnMoveToFirstItem">Go to first event</button>
         <button id="btnShowAllLine">Show all lines</button>
+        <button id="btnMoveToFirstItem">Go to first event</button>
         <button id="btnAutoScroll">Auto scroll</button>
         <!-- <button id="btnSave">Sauvegarder la timeline</button> -->
       </div>
@@ -83,9 +83,45 @@
     </div>
 
     <div id="modalHelp" title="?">
-      <p>Hold the <kbd>ctrl</kbd> key and scroll to zoom in and out</p>
-      <p>Double click on the timeline for a perfect zoom out</p>
-      <p>Use the green "+" button or right click on the timeline to add events</p>
+      <!-- <h1>What is simple timeline's goal?</h1> -->
+      <p>
+        The goal of this webapp is to help you visualize the passing of time.
+        I use it to visualize my life, but you could make a timeline about anything.
+      </p>
+      <p>
+        Your data stays yours 100%. 
+        In fact, you'll have to download and store the data yourself if you want to save a timeline.
+        There's no database behind this.
+      </p>
+      <h2>Tips and tricks:</h2>
+      <p>
+        <span class="push-left">- To zoom in and out: <br> </span>
+        Hold the <kbd>ctrl</kbd> key and scroll. Or pinch.
+      </p>
+      <p>
+        <span class="push-left">- For a perfect zoom out: <br> </span>
+        Double click on the timeline (not on an event).
+      </p>
+      <p>
+        <span class="push-left">- To add events: <br> </span>
+        Use the green "+" button or right click on the timeline 
+      </p>
+      <p>
+        <span class="push-left">- To save your timeline: <br> </span>
+        Click "Export timeline" and keep the file somewhere safe.
+      </p>
+      <p>
+        <span class="push-left">- To load a saved timeline: <br> </span>
+        Click "Import timeline" and drag and drop the file you previously exported.
+      </p>
+      <p>
+        <span class="push-left">- To change a timeline's name, description or start/end date: <br> </span>
+        Click on what you want to change.
+      </p>
+      <p>
+        <span class="push-left">- For questions, comments, feature requests and insults: <br> </span>
+        <a href="https://www.felixparadis.com/contact/">Reach out to me</a>
+      </p>
       <!-- <p>VOUS DEVEZ SAUVEGARDER VOTRE TIMELINE SI VOUS VOULEZ CONSERVER VOS CHANGEMENTS.</p>
       <p>Vous pouvez dragger les événement et changer leurs durée.</p>
       <p>Double cliquez sur la timeline pour un "zoom out parfait".</p>
@@ -100,73 +136,73 @@
 
     </div>
 
-    <div id="modalAddEvent" title="Ajouter un item">
-      <p>Titre: <input type="text" id="newEventTitle"></p>
-      <p>Description: <textarea type="text" id="newEventDesc" placeholder="(optionnel)"></textarea></p>
-      <p>Couleur: <select id="newEventColor">
-          <option value="default">Bleu</option>
-          <option value="red">Rouge</option>
-          <option value="green">Vert</option>
+    <div id="modalAddEvent" title="Add an event">
+      <p>Title: <input type="text" id="newEventTitle"></p>
+      <p>Description: <textarea type="text" id="newEventDesc" placeholder="(optional)"></textarea></p>
+      <p>Color: <select id="newEventColor">
+          <option value="default">Blue</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
           <option value="orange">Orange</option>
           <option value="magenta">Magenta</option>
-          <option value="black">Noir</option>
-          <option value="white">Blanc</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
         </select></p>
-      <p>Date de début: <input type="text" id="datePickerStart"></p>
-      <p>Date de fin: <input type="text" id="datePickerEnd"></p>
+      <p>Start Date: <input type="text" id="datePickerStart"></p>
+      <p>End Date: <input type="text" id="datePickerEnd"></p>
       <p></p>
     </div>
-    <div id="modalAddLine" title="Ajouter une ligne">
-      <p>Nom de la ligne: <input type="text" id="lineName"></p>
+    <div id="modalAddLine" title="Add a line">
+      <p>Line name: <input type="text" id="lineName"></p>
       <!-- Positionnement de la nouvelle ligne: <input type="text" id="newLineOrder"> -->
       <p></p>
     </div>
-    <div id="modalChangeEndDate" title="Spécifier une date de fin">
-      <p>Date de fin: <input type="text" id="datePickerTimelineEnd"></p>
+    <div id="modalChangeEndDate" title="Choose End Date">
+      <p>End Date: <input type="text" id="datePickerTimelineEnd"></p>
       <p></p>
     </div>
-    <div id="modalChangeStartDate" title="Spécifier une date de début">
-      <p>Date de début: <input type="text" id="datePickerTimelineStart"></p>
+    <div id="modalChangeStartDate" title="Choose Start Date">
+      <p>Start Date: <input type="text" id="datePickerTimelineStart"></p>
       <p></p>
     </div>
-    <div id="modalEditEvent" title="Modifier un item">
-      <p>Titre: <input type="text" id="editedEventTitle"></p>
+    <div id="modalEditEvent" title="Modify an item">
+      <p>Title: <input type="text" id="editedEventTitle"></p>
       <p>Description: <textarea type="text" id="editedEventDescription"></textarea></p>
-      <p>Couleur: <select id="editedEventColor">
-          <option value="default">Bleu</option>
-          <option value="red">Rouge</option>
-          <option value="green">Vert</option>
+      <p>Color: <select id="editedEventColor">
+          <option value="default">Blue</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
           <option value="orange">Orange</option>
           <option value="magenta">Magenta</option>
-          <option value="black">Noir</option>
-          <option value="white">Blanc</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
         </select></p>
-      <p>Date de début: <input type="text" id="editedEventDatePickerStart"></p>
-      <p>Date de fin: <input type="text" id="editedEventDatePickerEnd"></p>
+      <p>Start date: <input type="text" id="editedEventDatePickerStart"></p>
+      <p>End date: <input type="text" id="editedEventDatePickerEnd"></p>
       <p></p>
     </div>
-    <div id="modalEditLine" title="Renommer ou supprimer cette ligne">
-      <p>Nouveau nom pour la ligne: <input type="text" id="newLineName"></p>
+    <div id="modalEditLine" title="Rename or delete this line">
+      <p>New name for this line: <input type="text" id="newLineName"></p>
       <p></p>
     </div>
     <div id="modalInfoItem" title="">
       <p></p>
       <!-- Éventuellement il faudrait un img tag ici, quand on aura des images... -->
     </div>
-    <div id="modalNewTimeline" title="Créer une nouvelle Timeline">
-      <p>Titre: <input type="text" id="newTimelineName"></p>
-      <p>Date de début: <input type="text" id="newTimelineDatePickerStart"></p>
-      <p>Date de fin: <input type="text" id="newTimelineDatePickerEnd"></p>
+    <div id="modalNewTimeline" title="Create a new Timeline">
+      <p>Title: <input type="text" id="newTimelineName"></p>
+      <p>Start Date: <input type="text" id="newTimelineDatePickerStart"></p>
+      <p>End Date: <input type="text" id="newTimelineDatePickerEnd"></p>
       <p>Description: <textarea rows="4" cols="50" type="text" id="newTimelineDescription"></textarea>
       <p></p>
     </div>
-    <div id="modalNewTimelineSaveFirst" title="Créer une nouvelle Timeline">
-      <p>Voulez-vous sauvegarder cette timeline d'abord?</p>
+    <div id="modalNewTimelineSaveFirst" title="Create a new timeline">
+      <p>Do you want to save this timeline first?</p>
 
     </div>
-    <div id="modalRemoveLine" title="Voulez-vous supprimer cette ligne?">
-      <p>Si confirmer votre choix, la ligne ainsi que tous ses événements seront supprimés.</p>
-      <p>Aller de l'avant?</p>
+    <div id="modalRemoveLine" title="Do you want to delete this line?">
+      <p>This line and all its events will be deleted.</p>
+      <p>Go ahead?</p>
     </div>
     <div id="modalQuickAlert">
       <p></p>

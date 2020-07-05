@@ -19,29 +19,29 @@ $(document).ready(function () {
   $("#modalNewTimelineSaveFirst").dialog({
     autoOpen: false,
     buttons: {
-      "Oui": function () {
+      "Yes": function () {
         // saveTimeline();
         $("#modalNewTimelineSaveFirst").dialog("close");
         $("#modalNewTimeline").dialog("open");
         $("#modalNewTimeline p:last-of-type").html("La timeline précédente a été enregistré.");
       },
-      "non": function () {
+      "No": function () {
         $("#modalNewTimelineSaveFirst").dialog("close");
         $("#modalNewTimeline").dialog("open");
       },
-      "annuler": function () {
+      "Cancel": function () {
         $("#modalNewTimelineSaveFirst").dialog("close");
       }
     },
     minHeight: 200,
     minWidth: 400
   });
-
+  showDemoTimeline();
 });
 
 function cancelChangeDesc() {
   if (oldDesc == undefined) {
-    $("#newDescTemp").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()'>Ajouter une description</button></div>");
+    $("#newDescTemp").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()'>Add a description</button></div>");
   } else {
     $("#newDescTemp").replaceWith("<p id='description'>" + oldDesc + "</p>");
   }
@@ -56,7 +56,7 @@ function cancelChangeTitle() {
 function changeDesc1() {
   oldDesc = $("#description").html();
   $("#description, #btnAddDesc").replaceWith("<div id='newDescTemp'><textarea name='newDesc' cols='40' rows='5'></textarea><button onclick='changeDesc2()'>Ok!</button>" +
-    "<button onclick='cancelChangeDesc()'>Annuler</button></div>");
+    "<button onclick='cancelChangeDesc()'>Cancel</button></div>");
   $("textarea").val(oldDesc);
 }
 
@@ -64,9 +64,9 @@ function changeDesc2() {
   let newDesc = $("#newDescTemp textarea").val();
 
   if ($.trim(newDesc).length > 0) {
-    $("#newDescTemp").replaceWith("<p id='description' title='Changer la description'>" + newDesc + "</p>");
+    $("#newDescTemp").replaceWith("<p id='description' title='Change the description'>" + newDesc + "</p>");
   } else {
-    $("#newDescTemp").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()' title='Changer le titre'>Ajouter une description</button></div>");
+    $("#newDescTemp").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()' title='Change the description'>Change the description</button></div>");
   }
   $('#description').on('click', changeDesc1);
   changesSaved = false;
@@ -76,14 +76,14 @@ function changeTitle1() {
   oldTitle = $("h2").html();
 
   $("h2").replaceWith("<div id='newTitleTemp'><input id='inputTitle'></input><button onclick='changeTitle2()'>Ok!</button>" +
-    "<button onclick='cancelChangeTitle()'>Annuler</button></div>");
+    "<button onclick='cancelChangeTitle()'>Cancel</button></div>");
   $("#inputTitle").val(oldTitle);
 }
 
 function changeTitle2() {
   let newTitle = $("#newTitleTemp #inputTitle").val();
 
-  $("#newTitleTemp").replaceWith("<h2 title='Changer le titre'>" + newTitle + "</h2>");
+  $("#newTitleTemp").replaceWith("<h2 title='Change the title'>" + newTitle + "</h2>");
   $('h2').on('click', changeTitle1);
   changesSaved = false;
 }
@@ -195,7 +195,7 @@ function loadTimeline(info) {
   timeline.fit();
 
   if ($("#description").is(':empty')) {
-    $("#description").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()'>Ajouter une description</button></div>");
+    $("#description").replaceWith("<div id='btnAddDesc'><button onclick='changeDesc1()'>Add a description</button></div>");
   }
 
 }

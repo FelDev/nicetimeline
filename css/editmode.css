@@ -90,8 +90,7 @@ textarea {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 2.4rem;
-  height: 1rem
+  color: #333;
 }
 
 .vis-item.green {
@@ -204,6 +203,19 @@ button {
   color: red
 }
 
+#modalHelp h2 {
+  text-align: center;
+}
+
+#modalHelp p {
+  text-align: left;
+}
+#modalHelp .push-left {
+  display: block;
+  transform: translateX(-1.5em);
+  margin-top: 1em;
+}
+
 #newDescTemp {
   margin: auto;
   width: 75%
@@ -262,14 +274,13 @@ button {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 2rem;
-  height: 2rem
 }
 
 .vis-inner button:nth-of-type(3) {
   margin: .1rem;
   font-size: 2rem !important;
   position: absolute;
+  padding: 0;
   top: 0;
   right: 0;
   width: 3rem;
@@ -293,7 +304,7 @@ h2 {
   transition: .5s
 }
 
-h2:hover {
+header h2:hover {
   background-color: #e0d6ec;
   box-shadow: 3px 3px 6px black;
   padding: .5rem 1.5rem .5rem 1.5rem;

@@ -31,7 +31,7 @@ $(document).ready(function () {
             container.insertAdjacentElement('afterBegin', label);
             // Cacher une ligne se fait via btnHide
             let btnHide = document.createElement('button');
-            btnHide.innerHTML = '-';
+            btnHide.innerHTML = 'Hide';
             btnHide.title = "Hide this line";
             btnHide.style.fontSize = 'small';
             btnHide.addEventListener('click', function () {
@@ -40,8 +40,8 @@ $(document).ready(function () {
             container.insertAdjacentElement('beforeEnd', btnHide);
             // Suppression d'une ligne se fait via btnEdit
             let btnEdit = document.createElement('button');
-            btnEdit.innerHTML = 'M';
-            btnEdit.title = "Modifier ou supprimer cette ligne";
+            btnEdit.innerHTML = 'Edit';
+            btnEdit.title = "Modify or delete this line";
             btnEdit.style.fontSize = 'small';
             btnEdit.addEventListener('click', function () {
                 $("#modalEditLine").data('groupID', group.id)
@@ -52,7 +52,7 @@ $(document).ready(function () {
             // Ajout d'événements se fait via btnAddEvent
             let btnAddEvent = document.createElement('button');
             btnAddEvent.innerHTML = '+';
-            btnAddEvent.title = "Ajouter un événement";
+            btnAddEvent.title = "Add an event";
             btnAddEvent.style.fontSize = 'small';
             btnAddEvent.addEventListener('click', function () {
                 $('#newEventTitle').val("");
@@ -129,7 +129,7 @@ $(document).ready(function () {
     $("#modalAddEvent").dialog({
         autoOpen: false,
         buttons: {
-            "Oui": function () {
+            "Yes": function () {
                 let title = $("#newEventTitle").val();
                 let groupID = $("#modalAddEvent").data("groupID");
                 let startDate = $("#datePickerStart").val();
@@ -146,7 +146,7 @@ $(document).ready(function () {
                     }
                     else if (isValidDate(endDate)) {
                         if ($("#datePickerStart").val() > $("#datePickerEnd").val()) {
-                            $("#modalAddEvent p:last-of-type").html("La date de départ ne peut pas être avant la date de fin!");
+                            $("#modalAddEvent p:last-of-type").html("Start date cannot be before end date!");
                         }
                         else {
                             item.add({ id: itemIDCount, name: title, start: startDate, end: endDate, group: groupID, description: desc, 'className': color });
@@ -156,15 +156,15 @@ $(document).ready(function () {
                         }
                     }
                     else {
-                        $("#modalAddEvent p:last-of-type").html("AAAA-MM-JJ");
+                        $("#modalAddEvent p:last-of-type").html("YYYY-MM-DD");
                     }
                 }
                 else {
-                    $("#modalAddEvent p:last-of-type").html("AAAA-MM-JJ");
+                    $("#modalAddEvent p:last-of-type").html("YYYY-MM-DD");
                 }
 
             },
-            "Annuler": function () {
+            "Cancel": function () {
                 $(this).dialog("close");
             }
         },
@@ -184,14 +184,14 @@ $(document).ready(function () {
     $("#modalAddLine").dialog({
         autoOpen: false,
         buttons: {
-            "Ajouter une ligne": function () {
+            "Add a line": function () {
                 let lineName = $('#lineName').val();
                 // Si la nouvelle ligne n'a pas de nom, on avertit l'usager
                 if (lineName == "") {
-                    $("#modalAddLine p:last-of-type").html("Votre nouvelle ligne doit avoir un nom!");
+                    $("#modalAddLine p:last-of-type").html("Your new line must have a name!");
                 }
                 else if (lineName.length > 20) {
-                    $("#modalAddLine p:last-of-type").html("Le nom ne peut avoir plus de 20 caractères");
+                    $("#modalAddLine p:last-of-type").html("The line's name must be 20 characters or less.");
                 }
                 else {
                     try {
@@ -202,12 +202,12 @@ $(document).ready(function () {
                     }
                     catch (err) {
                         // Si la nouvelle ligne a le même nom qu'une ligne déjà existante, on avertit l'usager
-                        $("#modalAddLine p:last-of-type").html("Impossible! Il y a déjà une ligne qui s'appelle "
+                        $("#modalAddLine p:last-of-type").html("Impossible! There already is a line with name"
                             + "\"" + lineName + "\"");
                     }
                 }
             },
-            "annuler": function () {
+            "Cancel": function () {
                 $("#modalAddLine").dialog("close");
             }
         },
@@ -222,11 +222,11 @@ $(document).ready(function () {
     $("#modalChangeEndDate").dialog({
         autoOpen: false,
         buttons: {
-            "Mettre à jour": function () {
+            "Update": function () {
                 let newEndDate = $("#datePickerTimelineEnd").val();
                 // Vérification des dates...                        
                 if ($(".dateIndicator:nth-of-type(1)").html() > newEndDate) {
-                    $("#modalChangeEndDate p:last-of-type").html("La date de départ ne peut pas être avant la date de fin!");
+                    $("#modalChangeEndDate p:last-of-type").html("Start date cannot be before end date!");
                 }
                 else {
                     $('.dateIndicator:nth-of-type(2)').html(newEndDate);
@@ -239,7 +239,7 @@ $(document).ready(function () {
                 }
 
             },
-            "annuler": function () {
+            "Cancel": function () {
                 $("#modalChangeEndDate").dialog("close");
             }
         },
@@ -258,11 +258,11 @@ $(document).ready(function () {
     $("#modalChangeStartDate").dialog({
         autoOpen: false,
         buttons: {
-            "Mettre à jour": function () {
+            "Update": function () {
                 let newStartDate = $("#datePickerTimelineStart").val();
                 // Vérification des dates...
                 if (newStartDate > $(".dateIndicator:nth-of-type(2)").html()) {
-                    $("#modalChangeStartDate p:last-of-type").html("La date de départ ne peut pas être avant la date de fin!");
+                    $("#modalChangeStartDate p:last-of-type").html("Start date cannot be before end date!");
                 }
                 else {
                     $(".dateIndicator:nth-of-type(1)").html(newStartDate);
@@ -275,7 +275,7 @@ $(document).ready(function () {
                 }
 
             },
-            "annuler": function () {
+            "Cancel": function () {
                 $("#modalChangeStartDate").dialog("close");
             }
         },
@@ -290,7 +290,7 @@ $(document).ready(function () {
     $("#modalEditEvent").dialog({
         autoOpen: false,
         buttons: {
-            "Mettre à jour": function () {
+            "Update": function () {
                 let title = $("#editedEventTitle").val();
                 let startDate = $("#editedEventDatePickerStart").val();
                 let endDate = $("#editedEventDatePickerEnd").val();
@@ -315,7 +315,7 @@ $(document).ready(function () {
                     }
                     else if (isValidDate(endDate)) {
                         if (startDate > endDate) {
-                            $("#modalEditEvent p:last-of-type").html("La date de départ ne peut pas être avant la date de fin!");
+                            $("#modalEditEvent p:last-of-type").html("Start date cannot be before end date!");
                         }
                         else {
                             item.update({
@@ -334,16 +334,16 @@ $(document).ready(function () {
                         }
                     }
                     else {
-                        $("#modalEditEvent p:last-of-type").html("AAAA-MM-JJ");
+                        $("#modalEditEvent p:last-of-type").html("YYYY-MM-DD");
                     }
                 }
                 else {
-                    $("#modalEditEvent p:last-of-type").html("AAAA-MM-JJ");
+                    $("#modalEditEvent p:last-of-type").html("YYYY-MM-DD");
                 }
                 timeline.redraw();
 
             },
-            "annuler": function () {
+            "Cancel": function () {
                 $("#modalEditEvent").dialog("close");
             }
         },
@@ -357,17 +357,17 @@ $(document).ready(function () {
     $("#modalEditLine").dialog({
         autoOpen: false,
         buttons: {
-            "Mettre à jour": function () {
+            "Update": function () {
                 // Vérification des dates...
                 let oldLineName = $("#modalEditLine").data("groupID");
                 let newLineName = $('#newLineName').val();
 
                 // Si la nouvelle ligne n'a pas de nom, on avertit l'usager
                 if (newLineName == "") {
-                    $("#modalEditLine p:last-of-type").html("Votre nouvelle ligne doit avoir un nom!");
+                    $("#modalEditLine p:last-of-type").html("Your new line must have a name!");
                 }
                 else if (newLineName.length > 20) {
-                    $("#modalEditLine p:last-of-type").html("Le nom ne peut avoir plus de 20 caractères");
+                    $("#modalEditLine p:last-of-type").html("The line's name must be 20 characters or less.");
                 }
                 else {
                     group.forEach(element => {
@@ -382,13 +382,13 @@ $(document).ready(function () {
                     $(this).dialog("close");
                 }
             },
-            "Supprimer la ligne": function () {
+            "Delete this line": function () {
                 $("#modalEditLine").dialog("close");
                 $("#modalRemoveLine").data('groupID', $("#modalEditLine").data("groupID"))
                     .data('order', $("#modalEditLine").data("order"))
                     .dialog("open");
             },
-            "annuler": function () {
+            "Cancel": function () {
                 $("#modalEditLine").dialog("close");
             }
         },
@@ -418,7 +418,7 @@ $(document).ready(function () {
     $("#modalInfoItem").dialog({
         autoOpen: false,
         buttons: {
-            "babye": function () {
+            "Close": function () {
                 $(this).dialog("close");
             }
         },
@@ -449,7 +449,7 @@ $(document).ready(function () {
     $("#modalRemoveLine").dialog({
         autoOpen: false,
         buttons: {
-            "Oui": function () {
+            "Yes": function () {
                 group.remove({ id: $("#modalRemoveLine").data("groupID") });
                 // Il faut updater l'ordre des lignes qui sont après celle qu'on supprime
                 group.forEach(element => {
@@ -461,7 +461,7 @@ $(document).ready(function () {
                 changesSaved = false;
                 $(this).dialog("close");
             },
-            "Annuler": function () {
+            "Cancel": function () {
                 $(this).dialog("close");
             }
         },
