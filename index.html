@@ -93,6 +93,27 @@
         In fact, you'll have to download and store the data yourself if you want to save a timeline.
         There's no database behind this.
       </p>
+      <details>
+        <summary>Why have users exporting and importing files? </summary>
+        <p>
+          I chose that way of saving timelines rather than a classic account creation flow for <span class="bold">maximal privacy</span>.
+        </p>        
+        <p>
+          The first version of this webapp had users creating accounts and saving their data to a database, but virtually 100% of people had the same concern: "Won't you be able to see my timeline?". Indeed, I can hack my own websites quite easily.
+        </p>
+        <p>
+          At first I thought about adding client-side encryption, but, for users, that's about as complex and inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would have to look through the code.
+        </p>
+        <p>
+          With export/import of a simple .json file, you can turn your internet connection off and disable all cookies while using the app. It still works and nobody, not even me, <span class="bold">can</span> peek at your data.
+        </p>
+        <p>
+          On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to host. (So cheap, this is free to use. (But you can <a href="https://ko-fi.com/feldev">make a donation</a> if you want, much appreciated! <!-- (And you might be on the shoutout page, if you choose to.) -->))
+        </p>
+        <p>
+        If you would enjoy the ability to create an account and save your data on the cloud, do <a href="https://www.felixparadis.com/contact/">send a feature request</a>!
+        </p>
+      </details>
       <h2>Tips and tricks:</h2>
       <p>
         <span class="push-left">- To zoom in and out: <br> </span>
@@ -227,6 +248,8 @@
   </main>
   <footer>
     A project by <a href="https://www.felixparadis.com/">Félix Paradis</a>
+    — <a href="https://www.felixparadis.com/contact/">Send feedback</a>
+    — <a href="https://ko-fi.com/feldev">Buy me a coffee</a>
   </footer>
 </body>
 

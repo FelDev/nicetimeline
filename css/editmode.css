@@ -72,6 +72,10 @@ textarea {
   background-color: #fff
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .vis-label .vis-inner {
   min-height: 5.2rem
 }
@@ -208,9 +212,16 @@ button {
   text-align: center;
 }
 
+#modalHelp details {
+  width: 75%;
+  font-size: 2rem;
+  margin: 2rem auto;
+}
+
 #modalHelp p {
   text-align: left;
 }
+
 #modalHelp .push-left {
   display: block;
   transform: translateX(-1.5em);
