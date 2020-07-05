@@ -28,6 +28,10 @@
   padding: 0
 }
 
+a, a:visited {
+  color: #0000a0;
+}
+
 button {
   background-color: rgba(60, 209, 15, .7);
   color: #fff;
