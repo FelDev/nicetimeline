@@ -101,7 +101,12 @@ function dropHandler(ev) {
     if (ev.dataTransfer.items) {
       const reader = new FileReader();
       reader.onloadend = function () {
-        let data = JSON.parse(this.result);
+        let data
+        try {
+          data = JSON.parse(this.result);
+        } catch (err) {
+          return alert("This file appears to be invalid. :|")
+        }
         console.log('@data: ', data);
         loadTimeline(data);
         toggleImporter();
