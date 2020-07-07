@@ -53,7 +53,7 @@
     <a href="account.php">
       Gestion du compte
     </a> -->
-    
+
     <button onclick="showDemoTimeline()">Show demo timeline</button>
     <button onclick="startNewTimeline()">New timeline</button>
     <button onclick="toggleImporter()">Import timeline</button>
@@ -62,9 +62,9 @@
       <p>Drag and drop a .timeline file here</p>
       <!-- <input type="file"> -->
     </div>
-    <button onclick="exportTimeline()" >Export timeline</button>
+    <button onclick="exportTimeline()">Export timeline</button>
     <a id="exportTimeline" style="display: none;">Export timeline</a>
-    
+
   </nav>
   <main>
     <div class="dateIndicator" title="Change the timeline's Start Date">01-01-2000</div>
@@ -90,7 +90,7 @@
         I use it to visualize my life, but you could make a timeline about anything.
       </p>
       <p>
-        Your data stays yours 100%. 
+        Your data stays yours 100%.
         In fact, you'll have to download and store the data yourself if you want to save a timeline.
         There's no database behind this.
       </p>
@@ -98,21 +98,30 @@
         <summary>Why have users exporting and importing files? </summary>
         <p>
           I chose that way of saving timelines rather than a classic account creation flow for <span class="bold">maximal privacy</span>.
-        </p>        
-        <p>
-          The first version of this webapp had users creating accounts and saving their data to a database, but virtually 100% of people had the same concern: "Won't you be able to see my timeline?". Indeed, I can hack my own websites quite easily.
         </p>
         <p>
-          At first I thought about adding client-side encryption, but, for users, that's about as complex and inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would have to look through the code.
+          The first version of this webapp had users creating accounts and saving their data to a database, but
+          virtually 100% of people had the same concern: "Won't you be able to see my timeline?". Indeed, I can hack my
+          own websites quite easily.
         </p>
         <p>
-          With export/import of a simple .json file, you can turn your internet connection off and disable all cookies while using the app. It still works and nobody, not even me, <span class="bold">can</span> peek at your data.
+          At first I thought about adding client-side encryption, but, for users, that's about as complex and
+          inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would
+          have to look through the code.
         </p>
         <p>
-          On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to host. (So cheap, this is free to use. (But you can <a target="_blank" rel="noopener" href="https://ko-fi.com/feldev">make a donation</a> if you want, much appreciated! <!-- (And you might be on the shoutout page, if you choose to.) -->))
+          With export/import of a simple .json file, you can turn your internet connection off and disable all cookies
+          while using the app. It still works and nobody, not even me, <span class="bold">can</span> peek at your data.
         </p>
         <p>
-        If you would enjoy the ability to create an account and save your data on the cloud, do <a target="_blank" rel="noopener" href="https://www.felixparadis.com/contact/">send a feature request</a>!
+          On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to
+          host. (So cheap, this is free to use. (But you can <a target="_blank" rel="noopener"
+            href="https://ko-fi.com/feldev">make a donation</a> if you want, much appreciated!
+          <!-- (And you might be on the shoutout page, if you choose to.) -->))
+        </p>
+        <p>
+          If you would enjoy the ability to create an account and save your data on the cloud, do <a target="_blank"
+            rel="noopener" href="https://www.felixparadis.com/contact/">send a feature request</a>!
         </p>
       </details>
       <h2>Tips and tricks:</h2>
@@ -126,7 +135,7 @@
       </p>
       <p>
         <span class="push-left">- To add events: <br> </span>
-        Use the green "+" button or right click on the timeline 
+        Use the green "+" button or right click on the timeline
       </p>
       <p>
         <span class="push-left">- To edit events: <br> </span>
@@ -172,9 +181,17 @@
     </div>
 
     <div id="modalAddEvent" title="Add an event">
-      <p>Title: <input type="text" id="newEventTitle"></p>
-      <p>Description: <textarea type="text" id="newEventDesc" placeholder="(optional)"></textarea></p>
-      <p>Color: <select id="newEventColor">
+      <p>
+        <label for="newEventTitle">Title: </label>
+        <input type="text" id="newEventTitle">
+      </p>
+      <p>
+        <label for="newEventDesc"> Description: </label>
+        <textarea type="text" id="newEventDesc" placeholder="(optional)"></textarea>
+      </p>
+      <p>
+        <label for="newEventColor"> Color: </label>
+        <select id="newEventColor">
           <option value="default">Blue</option>
           <option value="red">Red</option>
           <option value="green">Green</option>
@@ -182,28 +199,52 @@
           <option value="magenta">Magenta</option>
           <option value="black">Black</option>
           <option value="white">White</option>
-        </select></p>
-      <p>Start Date: <input type="text" id="datePickerStart"></p>
-      <p>End Date: <input type="text" id="datePickerEnd"></p>
+        </select>
+      </p>
+      <p>
+        <label for="datePickerStart">Start Date: </label>
+        <input type="text" id="datePickerStart">
+      </p>
+      <p>
+        <label for="datePickerEnd">End Date: </label>
+        <input type="text" id="datePickerEnd">
+      </p>
       <p></p>
     </div>
     <div id="modalAddLine" title="Add a line">
-      <p>Line name: <input type="text" id="lineName"></p>
+      <p>
+        <label for="lineName">Line name: </label>
+        <input type="text" id="lineName">
+      </p>
       <!-- Positionnement de la nouvelle ligne: <input type="text" id="newLineOrder"> -->
       <p></p>
     </div>
     <div id="modalChangeEndDate" title="Choose End Date">
-      <p>End Date: <input type="text" id="datePickerTimelineEnd"></p>
+      <p>
+        <label for="datePickerTimelineEnd">End Date: </label>
+        <input type="text" id="datePickerTimelineEnd">
+      </p>
       <p></p>
     </div>
     <div id="modalChangeStartDate" title="Choose Start Date">
-      <p>Start Date: <input type="text" id="datePickerTimelineStart"></p>
+      <p>
+        <label for="datePickerTimelineStart">Start Date: </label>
+        <input type="text" id="datePickerTimelineStart">
+      </p>
       <p></p>
     </div>
     <div id="modalEditEvent" title="Modify an item">
-      <p>Title: <input type="text" id="editedEventTitle"></p>
-      <p>Description: <textarea type="text" id="editedEventDescription"></textarea></p>
-      <p>Color: <select id="editedEventColor">
+      <p>
+        <label for="editedEventTitle">Title:</label>
+        <input type="text" id="editedEventTitle">
+      </p>
+      <p>
+        <label for="editedEventDescription">Description:</label>
+        <textarea type="text" id="editedEventDescription"></textarea>
+      </p>
+      <p>
+        <label for="editedEventColor">Color:</label>
+        <select id="editedEventColor">
           <option value="default">Blue</option>
           <option value="red">Red</option>
           <option value="green">Green</option>
@@ -211,13 +252,23 @@
           <option value="magenta">Magenta</option>
           <option value="black">Black</option>
           <option value="white">White</option>
-        </select></p>
-      <p>Start date: <input type="text" id="editedEventDatePickerStart"></p>
-      <p>End date: <input type="text" id="editedEventDatePickerEnd"></p>
+        </select>
+      </p>
+      <p>
+        <label for="editedEventDatePickerStart">Start date:</label>
+        <input type="text" id="editedEventDatePickerStart">
+      </p>
+      <p>
+        <label for="editedEventDatePickerEnd">End date:</label>
+        <input type="text" id="editedEventDatePickerEnd">
+      </p>
       <p></p>
     </div>
     <div id="modalEditLine" title="Rename or delete this line">
-      <p>New name for this line: <input type="text" id="newLineName"></p>
+      <p>
+        <label for="newLineName">New name for this line: </label>
+        <input type="text" id="newLineName">
+      </p>
       <p></p>
     </div>
     <div id="modalInfoItem" title="">
@@ -225,10 +276,18 @@
       <!-- Éventuellement il faudrait un img tag ici, quand on aura des images... -->
     </div>
     <div id="modalNewTimeline" title="Create a new Timeline">
-      <p>Title: <input type="text" id="newTimelineName"></p>
-      <p>Start Date: <input type="text" id="newTimelineDatePickerStart"></p>
-      <p>End Date: <input type="text" id="newTimelineDatePickerEnd"></p>
-      <p>Description: <textarea rows="4" cols="50" type="text" id="newTimelineDescription"></textarea>
+      <p>
+        <label for="newTimelineName">Title:</label>
+        <input type="text" id="newTimelineName"></p>
+      <p>
+        <label for="newTimelineDatePickerStart">Start Date:</label>
+        <input type="text" id="newTimelineDatePickerStart"></p>
+      <p>
+        <label for="newTimelineDatePickerEnd">End Date:</label>
+        <input type="text" id="newTimelineDatePickerEnd"></p>
+      <p>
+        <label for="newTimelineDescription">Description:</label>
+        <textarea rows="4" cols="50" type="text" id="newTimelineDescription"></textarea>
       <p></p>
     </div>
     <div id="modalNewTimelineSaveFirst" title="Create a new timeline">
@@ -254,27 +313,29 @@
     — <a target="_blank" rel="noopener" href="https://ko-fi.com/feldev">Buy me a coffee</a>
   </footer>
   <script type="application/javascript">
-		var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-		var doNotTrack = (dnt == "1" || dnt == "yes");
-		if (!doNotTrack) {
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-			if (window.sessionStorage) {
-				var GA_SESSION_STORAGE_KEY = 'ga:clientId';
-				ga('create', 'UA-109396923-1', {
-					'storage': 'none',
-					'clientId': sessionStorage.getItem(GA_SESSION_STORAGE_KEY)
-				 });
-				 ga(function(tracker) {
-					sessionStorage.setItem(GA_SESSION_STORAGE_KEY, tracker.get('clientId'));
-				 });
-			 }
-			ga('set', 'anonymizeIp', true);
-			ga('send', 'pageview');
-		}
-		</script>
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+    if (!doNotTrack) {
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+      if (window.sessionStorage) {
+        var GA_SESSION_STORAGE_KEY = 'ga:clientId';
+        ga('create', 'UA-109396923-1', {
+          'storage': 'none',
+          'clientId': sessionStorage.getItem(GA_SESSION_STORAGE_KEY)
+        });
+        ga(function (tracker) {
+          sessionStorage.setItem(GA_SESSION_STORAGE_KEY, tracker.get('clientId'));
+        });
+      }
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    }
+  </script>
 </body>
 
 </html>
