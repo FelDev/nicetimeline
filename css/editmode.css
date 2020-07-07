@@ -47,6 +47,7 @@ button:hover, button:focus {
 
 nav button, #btnContainer button {
   border: 1px solid #70df62;
+  text-shadow: 0px 0px 3px #45982e;
 }
 
 h1 {
