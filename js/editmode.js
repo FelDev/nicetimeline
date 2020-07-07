@@ -126,13 +126,21 @@ function dragOverHandler(ev) {
 }
 
 function clearTimeline() {
-  for (let key in timeline.groupsData._data._data) {
-    let obj = timeline.groupsData._data._data[key];
+  timeline.groupsData._data._data.forEach( g => {
     group.remove({
-      id: obj.id
+      id: g.id
     });
     lineCount--;
-  }
+    
+  })
+  // old way #DELETE
+  // for (let key in timeline.groupsData._data._data) {
+    // let obj = timeline.groupsData._data._data[key];
+    // group.remove({
+      // id: obj.id
+    // });
+    // lineCount--;
+  // }
 }
 
 function loadTimeline(info) {
@@ -234,16 +242,29 @@ function exportTimeline() {
   };
 
   // Créer un tableau qui contient toutes les lignes
-  for (let key in timeline.groupsData._data._data) {
-    let obj = timeline.groupsData._data._data[key];
+  timeline.groupsData._data._data.forEach( g => {
     line = {
-      name: obj.content,
-      order: obj.order,
-      id: obj.id,
+      name: g.content,
+      order: g.order,
+      id: g.id,
       allPeriod: []
     }
     allLine.push(line);
-  }
+    
+  })
+  // old way #DELETE
+  // for (let key in timeline.groupsData._data._data) {
+  //   console.log('@key: ', key);
+    
+  //   let obj = timeline.groupsData._data._data[key];
+  //   line = {
+  //     name: obj.content,
+  //     order: obj.order,
+  //     id: obj.id,
+  //     allPeriod: []
+  //   }
+  //   allLine.push(line);
+  // }
 
   // Puis ajouter tous les items (période) dans le tableau d'items de leur ligne respective
   timeline.itemsData.forEach(element => {

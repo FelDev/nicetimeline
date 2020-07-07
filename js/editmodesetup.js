@@ -8,6 +8,7 @@ $(document).ready(function () {
     option = {
         horizontalScroll: true,
         zoomKey: "ctrlKey",
+        zoomFriction: 33,
         editable: {
             add: false,
             updateTime: true,
