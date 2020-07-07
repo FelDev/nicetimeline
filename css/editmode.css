@@ -164,7 +164,7 @@ textarea {
 }
 
 button {
-  background-color: rgba(60, 209, 15, .7);
+  background-color: rgba(60, 209, 15, .75);
   color: #fff;
   border-radius: 5px;
   font-family: fallingSky;
@@ -282,7 +282,7 @@ button {
 }
 
 .vis-inner button {
-  padding: .2rem;
+  padding: 0.25rem 0.5rem;
   margin: .1rem
 }
 
