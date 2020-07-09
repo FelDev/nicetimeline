@@ -1,0 +1,445 @@
+@font-face {
+  font-family: vengeance;
+  src: url(../font/vengeance_regular.otf)
+}
+
+@font-face {
+  font-family: fallingSky;
+  src: url(../font/FallingSkyCond.otf)
+}
+
+@font-face {
+  font-family: fallingSkyObl;
+  src: url(../font/FallingSkyCondObl.otf)
+}
+
+@font-face {
+  font-family: moskBold;
+  src: url(../font/moskbold700.ttf)
+}
+
+@font-face {
+  font-family: mosk;
+  src: url(../font/moskbold600.ttf)
+}
+
+* {
+  margin: 0;
+  padding: 0
+}
+
+a, a:visited {
+  color: #0000a0;
+}
+
+button {
+  background-color: rgba(60, 209, 15, .7);
+  color: #fff;
+  border-radius: 5px;
+  font-family: fallingSky;
+  transition: all .25s
+}
+
+button:hover, button:focus {
+  outline: 0;
+  box-shadow: 0 2px 10px 5px #97B1BF;
+}
+
+nav button, #btnContainer button {
+  border: 1px solid #70df62;
+  text-shadow: 0px 0px 3px #45982e;
+}
+
+h1 {
+  color: #00d;
+  cursor: pointer;
+  font-family: vengeance
+}
+
+html {
+  font-size: 62.5%
+}
+
+input {
+  border-radius: 5px;
+  font-size: 2rem
+}
+
+textarea {
+  font-size: 1.6rem;
+  word-wrap: break-word
+}
+
+#timeline {
+  margin: 0 2.5rem 2.5rem 2.5rem;
+  font-size: 1.6rem;
+  background-color: rgba(255, 255, 255, .6);
+  background-color: #fff
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.vis-label .vis-inner {
+  min-height: 5.2rem
+}
+
+.vis-inner span {
+  padding-right: 4rem;
+  font-family: moskBold;
+  font-size: 2rem;
+  max-width: 100px;
+  word-wrap: break-word
+}
+
+.vis-inner button:first-of-type {
+  background-color: #f4eb42;
+  margin: .1rem;
+  font-size: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #333;
+}
+
+.vis-item.green {
+  background-color: greenyellow;
+  border-color: green
+}
+
+.vis-item.green.vis-point {
+  background-color: initial
+}
+
+.vis-item.black {
+  background-color: #000;
+  border-color: Black;
+  color: #fff
+}
+
+.vis-item.black.vis-point {
+  background-color: initial;
+  color: #000
+}
+
+.vis-item.orange {
+  background-color: gold;
+  border-color: orange
+}
+
+.vis-item.orange.vis-point {
+  background-color: initial
+}
+
+.vis-item.magenta {
+  background-color: magenta;
+  border-color: purple
+}
+
+.vis-item.magenta.vis-point {
+  background-color: initial
+}
+
+.vis-item.red {
+  background-color: red;
+  border-color: darkred;
+  color: #fff
+}
+
+.vis-item.red.vis-point {
+  background-color: initial;
+  color: #000
+}
+
+.vis-item.white {
+  background-color: #fff;
+  border-color: lightcyan;
+  color: #000
+}
+
+.vis-item.white.vis-point {
+  background-color: initial;
+  border-color: lightcyan
+}
+
+button {
+  background-color: rgba(60, 209, 15, .75);
+  color: #fff;
+  border-radius: 5px;
+  font-family: fallingSky;
+  font-size: 2rem;
+  padding: .4rem 1rem
+}
+
+#btnAddDesc {
+  margin: 1em auto;
+  width: 25em
+}
+
+#btnContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5rem 2.5rem 1rem 2.5rem
+}
+
+#btnContainer div button {
+  margin-right: 5px
+}
+
+#description {
+  border-radius: .5rem;
+  transition: .5s;
+  cursor: pointer;
+}
+
+#description:hover {
+  background-color: rgba(158, 255, 255, .5);
+  box-shadow: 3px 3px 6px black;
+  padding: .5rem 1.5rem .5rem 1.5rem;
+  transform: translate(-4px, -4px);
+  transition: .5s .5s
+}
+
+#description:active {
+  box-shadow: 1px 1px 3px black;
+  transform: translate(0px, 0px);
+  transition: .5s
+}
+
+#modalAddLine p:last-of-type,
+#modalEditEvent p:last-of-type,
+#modalAddEvent p:last-of-type {
+  color: red
+}
+
+#modalHelp h2 {
+  text-align: center;
+}
+
+#modalHelp details {
+  width: 75%;
+  font-size: 2rem;
+  margin: 2rem auto;
+}
+
+#modalHelp p {
+  text-align: left;
+}
+
+#modalHelp .push-left {
+  display: block;
+  transform: translateX(-1.5em);
+  margin-top: 1em;
+}
+
+#newDescTemp {
+  margin: auto;
+  width: 75%
+}
+
+#newDescTemp textarea {
+  margin: 1em 0;
+  padding: 1em;
+  width: 100%
+}
+
+.dateIndicator {
+  border-radius: 5px;
+  font-family: fallingSky;
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  transition: .5s;
+  cursor: pointer;
+}
+
+.dateIndicator:nth-of-type(1) {
+  left: 1rem
+}
+
+.dateIndicator:nth-of-type(1):active {
+  box-shadow: 1px 1px 3px black;
+  transform: translate(-4px, -4px)
+}
+
+.dateIndicator:nth-of-type(2) {
+  right: 1rem
+}
+
+.dateIndicator:nth-of-type(2):active {
+  box-shadow: 1px 1px 3px black;
+  transform: translate(4px, -4px)
+}
+
+.dateIndicator:hover {
+  background-color: rgba(158, 255, 255, .5);
+  box-shadow: 2px 2px 5px black;
+  padding: .5rem
+}
+
+.vis-label.draggable {
+  padding-bottom: 6rem
+}
+
+.vis-inner button {
+  padding: 0.25rem 0.5rem;
+  margin: .1rem
+}
+
+.vis-inner button:nth-of-type(1) {
+  border: 0.1em #f4ec42 solid;
+}
+
+.vis-inner button:nth-of-type(2) {
+  background-color: #00d;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0.1em #0001dd solid;
+}
+
+.vis-inner button:nth-of-type(3) {
+  margin: .1rem;
+  font-size: 2rem !important;
+  position: absolute;
+  padding: 0;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  border: 0.1em #78df62 solid;
+}
+
+form {
+  display: inline
+}
+
+h1 {
+  font-size: 4rem
+}
+
+h2 {
+  border-radius: .5rem;
+  font-family: moskBold;
+  font-size: 3rem;
+  line-height: 4rem;
+  padding-top: .5rem;
+  transition: .5s;
+  cursor: pointer;
+}
+
+header h2:hover {
+  background-color: #e0d6ec;
+  box-shadow: 3px 3px 6px black;
+  padding: .5rem 1.5rem .5rem 1.5rem;
+  transform: translate(-4px, -4px)
+}
+
+h2:active {
+  box-shadow: 1px 1px 3px black;
+  transform: translate(0px, 0px)
+}
+
+header {
+  border-bottom: 2px solid black;
+  background-color: #ede7f4;
+  display: flex;
+  justify-content: space-between;
+  min-height: 7rem;
+  font-size: 1.6rem
+}
+
+header * {
+  margin: 1rem
+}
+
+html {
+  background-color: rgba(209, 255, 255, .5)
+}
+
+hr {
+  margin: 2em;
+}
+section {
+  font-size: 1.6rem
+}
+
+main {
+  width: 100%;
+  position: relative
+}
+
+nav {
+  background-color: rgba(17, 125, 236, .9);
+  border-bottom: 2px solid black;
+  font-size: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  transition: .5s ease-in-out;
+  width: 100%
+}
+
+nav a, nav button {
+  display: block;
+  font-family: helvetica !important;
+  padding: 1rem 2rem;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px #000
+}
+
+nav button {
+  margin: 0.5em;
+}
+
+nav a:hover {
+  text-decoration: underline
+}
+
+p {
+  font-size: 2rem;
+  margin: 1rem auto;
+  text-align: center;
+  width: 75%
+}
+
+#drop_zone {
+  background: aqua;
+  position: fixed;
+  top: -100vh;
+  z-index: 10;
+  height: 98vh;
+  width: 75vw;
+  display: flex;
+  align-items: center;
+  transition: 1s;
+}
+
+#drop_zone button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#drop_zone.show {
+  top: 1vh;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 1.5rem;
+  border-top: 1px solid black;
+  background: #d6def6;
+  padding: 0.5rem;
+}
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */

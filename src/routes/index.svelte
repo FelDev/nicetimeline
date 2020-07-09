@@ -1,153 +1,315 @@
 <style>
-  h1,
-  figure,
-  p {
-    text-align: center;
-    margin: 0 auto;
-  }
 
-  h1 {
-    font-size: 2.8em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
-  }
-
-  figure {
-    margin: 0 0 1em 0;
-  }
-
-  img {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 0 1em 0;
-  }
-
-  p {
-    margin: 1em auto;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
-    }
-  }
 </style>
 
 <svelte:head>
-  <title>Sapper project template</title>
+  <script type="text/javascript">
+    if (top != self) top.location.replace(self.location.href); 
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Free timeline creation tool to visualize the passing of time.">
+  <title>Simple Timeline</title>
+  <link rel="shortcut icon" href="image/favicon.ico">
+  <link href="css/librairies/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="css/editmode.css" />
+  <link href="css/librairies/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+  <script src="js/librairies/jquery.min.js"></script>
+  <script src="js/librairies/jquery-ui.min.js"></script>
+  <script src="js/librairies/vis-timeline-graph2d.min.js"></script>
+  <script src="js/timelinebasic.js"></script>
+  <script src="js/editmodesetup.js"></script>
+  <script src="js/editmode.js"></script>
+  <script src="js/savenewtimeline.js"></script>
+  <script src="js/dateformatchecker.js"></script>
 </svelte:head>
 
 <PageTransition>
 
-  <h1>Nice Timeline</h1>
-  <!-- <figure>
-		<img alt='Success Kid' src='successkid.jpg'>
-		<figcaption>Have fun with Sapper!</figcaption>
-	</figure> -->
+  <header>
+    <h1 title="A tool to visualize the passing of time">Simple Timeline</h1>
+    <h2 id="timelineTitle" tabindex="0" role="button" title="Change the Title">Timeline's title</h2>
+    <div>
+      <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
+      <button id="btnShare">Partager</button>
+      <form action="account.php" method="GET">
+        <button name="action">Déconnexion</button>
+      </form> -->
+    </div>
+  </header>
+  <nav>
+    <!-- Les liens du nav appel la fonction changeMenu pour enlever ledit menu une fois qu'on se fait rediriger (sur mobile)-->
+    <!-- <a href="account.php">
+      Toutes mes timelines
+    </a>
+    <a href="#">
+      Créer une nouvelle timeline
+    </a>
+    <a href="account.php">
+      Gestion du compte
+    </a> -->
 
-  <p>
-    <strong>Try editing this timeline and do send feedback!</strong>
-  </p>
-  <label for="startDate">Start date</label>
-  <input id="startDate" bind:value={options.min} type="date" />
-  <label for="endDate">End date</label>
-	<button on:click="{showAllGroups}">Show All Lines</button>
-  <input
-    id="endDate"
-    bind:value={options.max}
-    on:change={updateTimeline}
-    type="date" />
-  <h2>John Doe's life</h2>
-  <div bind:this={container} />
+    <button onclick="showDemoTimeline()">Show demo timeline</button>
+    <button onclick="startNewTimeline()">New timeline</button>
+    <button onclick="toggleImporter()">Import timeline</button>
+    <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+      <button onclick="toggleImporter()">x</button>
+      <p>Drag and drop a .timeline file here</p>
+      <!-- <input type="file"> -->
+    </div>
+    <button onclick="exportTimeline()">Export timeline</button>
+    <a id="exportTimeline" style="display: none;">Export timeline</a>
+
+  </nav>
+  <main>
+    <div tabindex="0" role="button" class="dateIndicator" title="Change the timeline's Start Date">01-01-2000</div>
+    <p tabindex="0" role="button" id="description" title="Change the description"></p>
+    <div tabindex="0" role="button" class="dateIndicator" title="Change the timeline's End Date">31-12-2099</div>
+
+
+    <div id=btnContainer>
+      <div>
+        <button id="btnAddLine">Add a line</button>
+        <button id="btnShowAllLine">Show all lines</button>
+        <button id="btnMoveToFirstItem">Go to first event</button>
+        <!-- <button id="btnAutoScroll">Auto scroll</button> -->
+        <!-- <button id="btnSave">Sauvegarder la timeline</button> -->
+      </div>
+      <button id="btnHelp">?</button>
+    </div>
+
+    <div id="modalHelp" title="?">
+      <h2>What's Simple Timeline?</h2>
+      <p>
+        The goal of this webapp is to help you visualize the passing of time.
+        I use it to visualize my life, but you could make a timeline about anything.
+      </p>
+      <p>
+        Your data stays yours 100%.
+        In fact, you'll have to download and store the data yourself if you want to save a timeline.
+        There's no database behind this.
+      </p>
+      <details>
+        <summary>Why have users exporting and importing files? </summary>
+        <p>
+          I chose that way of saving timelines rather than a classic account creation flow for <span class="bold">maximal privacy</span>.
+        </p>
+        <p>
+          The first version of this webapp had users creating accounts and saving their data to a database, but
+          virtually 100% of people had the same concern: "Won't you be able to see my timeline?". Indeed, I can hack my
+          own websites quite easily.
+        </p>
+        <p>
+          At first I thought about adding client-side encryption, but, for users, that's about as complex and
+          inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would
+          have to look through the code.
+        </p>
+        <p>
+          With export/import of a simple .json file, you can turn your internet connection off and disable all cookies
+          while using the app. It still works and nobody, not even me, <span class="bold">can</span> peek at your data.
+        </p>
+        <p>
+          On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to
+          host. (So cheap, this is free to use. (But you can <a target="_blank" rel="noopener"
+            href="https://ko-fi.com/feldev">make a donation</a> if you want, much appreciated!
+          <!-- (And you might be on the shoutout page, if you choose to.) -->))
+        </p>
+        <p>
+          If you would enjoy the ability to create an account and save your data on the cloud, do <a target="_blank"
+            rel="noopener" href="https://www.felixparadis.com/contact/">send a feature request</a>!
+        </p>
+      </details>
+      <h2>Tips and tricks:</h2>
+      <p>
+        <span class="push-left">- To zoom in and out: <br> </span>
+        Hold the <kbd>ctrl</kbd> key and scroll. Or pinch.
+      </p>
+      <p>
+        <span class="push-left">- For a perfect zoom out: <br> </span>
+        Double click on the timeline (not on an event).
+      </p>
+      <p>
+        <span class="push-left">- To add events: <br> </span>
+        Use the green "+" button or right click on the timeline
+      </p>
+      <p>
+        <span class="push-left">- To edit events: <br> </span>
+        Right click on them. You can also drag them around.
+      </p>
+      <p>
+        <span class="push-left">- To move lines up and down: <br> </span>
+        Click on a line's name and drag it up or down.
+      </p>
+      <p>
+        <span class="push-left">- To change a timeline's name, description or start/end date: <br> </span>
+        Click on what you want to change.
+      </p>
+      <p>
+        <span class="push-left">- To save your timeline: <br> </span>
+        Click "Export timeline" and keep the file somewhere safe.
+      </p>
+      <p>
+        <span class="push-left">- To load a saved timeline: <br> </span>
+        Click "Import timeline" and drag and drop the file you previously exported.
+      </p>
+      <!-- <p>
+        <span class="push-left">- : <br> </span>
+        
+      </p> -->
+      <hr>
+      <p>
+        For questions, comments, feature requests and insults,
+        <a target="_blank" rel="noopener" href="https://www.felixparadis.com/contact/">Reach out to me.</a>
+      </p>
+      <!-- <p>VOUS DEVEZ SAUVEGARDER VOTRE TIMELINE SI VOUS VOULEZ CONSERVER VOS CHANGEMENTS.</p>
+      <p>Vous pouvez dragger les événement et changer leurs durée.</p>
+      <p>Double cliquez sur la timeline pour un "zoom out parfait".</p>
+      <p>Double cliquez sur un événement pour afficher sa description.</p>
+      <p>Faites un clic droit sur la timeline pour ajouter un événement.</p>
+      <p>Faites un clic droit sur un événement pour le modifier.</p>
+      <p>Changez l'ordre des lignes en les draggant une à la fois.</p>
+      <p>Amenez votre curseur en dehors de la timeline pour faire défiler la page.</p>
+      <p>Les dates de début et de fin de votre timeline sont affichées en haut et sont modifiables.</p>
+      <p>Cliquez sur le titre pour le modifier.</p>
+      <p>Cliquez sur la description pour la modifier.</p> -->
+
+    </div>
+
+    <div id="modalAddEvent" title="Add an event">
+      <p>
+        <label for="newEventTitle">Title: </label>
+        <input type="text" id="newEventTitle">
+      </p>
+      <p>
+        <label for="newEventDesc"> Description: </label>
+        <textarea type="text" id="newEventDesc" placeholder="(optional)"></textarea>
+      </p>
+      <p>
+        <label for="newEventColor"> Color: </label>
+        <select id="newEventColor">
+          <option value="default">Blue</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="orange">Orange</option>
+          <option value="magenta">Magenta</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
+        </select>
+      </p>
+      <p>
+        <label for="datePickerStart">Start Date: </label>
+        <input type="text" id="datePickerStart">
+      </p>
+      <p>
+        <label for="datePickerEnd">End Date: </label>
+        <input type="text" id="datePickerEnd">
+      </p>
+      <p></p>
+    </div>
+    <div id="modalAddLine" title="Add a line">
+      <p>
+        <label for="lineName">Line name: </label>
+        <input type="text" id="lineName">
+      </p>
+      <!-- Positionnement de la nouvelle ligne: <input type="text" id="newLineOrder"> -->
+      <p></p>
+    </div>
+    <div id="modalChangeEndDate" title="Choose End Date">
+      <p>
+        <label for="datePickerTimelineEnd">End Date: </label>
+        <input type="text" id="datePickerTimelineEnd">
+      </p>
+      <p></p>
+    </div>
+    <div id="modalChangeStartDate" title="Choose Start Date">
+      <p>
+        <label for="datePickerTimelineStart">Start Date: </label>
+        <input type="text" id="datePickerTimelineStart">
+      </p>
+      <p></p>
+    </div>
+    <div id="modalEditEvent" title="Modify an item">
+      <p>
+        <label for="editedEventTitle">Title:</label>
+        <input type="text" id="editedEventTitle">
+      </p>
+      <p>
+        <label for="editedEventDescription">Description:</label>
+        <textarea type="text" id="editedEventDescription"></textarea>
+      </p>
+      <p>
+        <label for="editedEventColor">Color:</label>
+        <select id="editedEventColor">
+          <option value="default">Blue</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="orange">Orange</option>
+          <option value="magenta">Magenta</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
+        </select>
+      </p>
+      <p>
+        <label for="editedEventDatePickerStart">Start date:</label>
+        <input type="text" id="editedEventDatePickerStart">
+      </p>
+      <p>
+        <label for="editedEventDatePickerEnd">End date:</label>
+        <input type="text" id="editedEventDatePickerEnd">
+      </p>
+      <p></p>
+    </div>
+    <div id="modalEditLine" title="Rename or delete this line">
+      <p>
+        <label for="newLineName">New name for this line: </label>
+        <input type="text" id="newLineName">
+      </p>
+      <p></p>
+    </div>
+    <div id="modalInfoItem" title="">
+      <p></p>
+      <!-- Éventuellement il faudrait un img tag ici, quand on aura des images... -->
+    </div>
+    <div id="modalNewTimeline" title="Create a new Timeline">
+      <p>
+        <label for="newTimelineName">Title:</label>
+        <input type="text" id="newTimelineName"></p>
+      <p>
+        <label for="newTimelineDatePickerStart">Start Date:</label>
+        <input type="text" id="newTimelineDatePickerStart"></p>
+      <p>
+        <label for="newTimelineDatePickerEnd">End Date:</label>
+        <input type="text" id="newTimelineDatePickerEnd"></p>
+      <p>
+        <label for="newTimelineDescription">Description:</label>
+        <textarea rows="4" cols="50" type="text" id="newTimelineDescription"></textarea>
+      <p></p>
+    </div>
+    <div id="modalNewTimelineSaveFirst" title="Create a new timeline">
+      <p>Do you want to save this timeline first?</p>
+
+    </div>
+    <div id="modalRemoveLine" title="Do you want to delete this line?">
+      <p>This line and all its events will be deleted.</p>
+      <p>Go ahead?</p>
+    </div>
+    <div id="modalQuickAlert">
+      <p></p>
+    </div>
+
+    <!-- Le plus important des div!!! -->
+    <div id="timeline" oncontextmenu="return false;"></div>
+
+  </main>
+  <Footer/>
+
 </PageTransition>
 
 <script>
   import PageTransition from "../components/PageTransition.svelte";
   import { Timeline } from "vis-timeline/standalone";
   import { onMount } from "svelte";
-  let container;
-  let timeline;
-  let startDate = "2000-01-01";
-	let endDate = "2100-01-01";
-	let groups;
-  let items;
-  let options = {
-    horizontalScroll: true,
-    zoomKey: "ctrlKey",
-    editable: {
-      add: false,
-      updateTime: true,
-      updateGroup: true,
-      remove: true,
-      overrideItems: false
-    },
-    max: endDate,
-    min: startDate,
-    groupEditable: true,
-    groupOrder: function(a, b) {
-      return a.order - b.order;
-    },
-    groupOrderSwap: function(a, b, groups) {
-      let v = a.order;
-      a.order = b.order;
-      b.order = v;
-    },
-    groupTemplate: function(group){
-      var container = document.createElement('div');
-      var label = document.createElement('span');
-      label.innerHTML = group.content + ' ';
-      container.insertAdjacentElement('afterBegin',label);
-      var hide = document.createElement('button');
-      hide.innerHTML = 'hide';
-      hide.style.fontSize = 'small';
-      hide.addEventListener('click',function(){
-        groups.update({id: group.id, visible: false});
-      });
-      container.insertAdjacentElement('beforeEnd',hide);
-      return container;
-    }
-      
-  };
-  onMount(() => {
-    // Create a DataSet (allows two way data-binding)
-    items = new vis.DataSet([
-      { id: 1, content: "123 fake Street", start: "2000-04-20", end:"2012-12-12", group:"g1"},
-      { id: 2, content: "456 famous avenue", start: "2012-12-13", end:"2015-05-05", group:"g1"},
-      { id: 3, content: "789 college boulevard", start: "2015-05-06", end:"2018-06-22", group:"g1"},
-      { id: 4, content: "666 elm Street", start: "2018-06-22", end: "2020-06-16", group:"g1"},
-      { id: 6, content: "Joe's Garage", start: "2014-04-27", end: "2015-06-16", group:"g2" },
-      { id: 7, content: "Evil Corp", start: "2016-07-27", end: "2020-06-06", group:"g2" },
-      { id: 8, content: "Gap Year in Canada", start: "2015-06-27", end: "2016-06-22", group:"g3" },
-      { id: 9, content: "Primary School", start: "2006-08-27", end: "2012-06-22", group:"g4" },
-      { id: 10, content: "High School", start: "2012-08-27", end: "2019-06-22", group:"g4" },
-      { id: 11, content: "College", start: "2019-08-27", end: "2022-06-22", group:"g4" },
-    ]);
-    groups = new vis.DataSet([
-      {"content": "Address", "id": "g1", "order": 1, className:'openwheel'},
-      {"content": "Work", "id": "g2", "order": 2, className:'openwheel'},
-      {"content": "Travels", "id": "g3", "order": 3, className:'openwheel'},
-      {"content": "School", "id": "g4", "order": 4, className:'openwheel'}
-    ]);
-    console.log("@groups: ", groups);
-    // Configuration for the Timeline
-
-    // Create a Timeline
-		timeline = new vis.Timeline(container);
-		timeline.setOptions(options);
-		timeline.setGroups(groups);
-		timeline.setItems(items);
-
-  });
-  function updateTimeline() {
-    console.log("@updateTimeline", options);
-    timeline.setOptions(options);
-    // timeline.setWindow(startDate, endDate, { animation: { duration: 500, easingFunction: 'linear' } });
-	}
-	
-	function showAllGroups(){
-    groups.forEach(function(group){
-      groups.update({id: group.id, visible: true});
-    })
-  };
+  import Footer from "../components/Footer.svelte"
 </script>
