@@ -13,13 +13,11 @@
   <meta name="description" content="Free timeline creation tool to visualize the passing of time.">
   <title>Simple Timeline</title>
   <link rel="shortcut icon" href="image/favicon.ico">
-  <!-- <link href="css/librairies/vis.css" rel="stylesheet" type="text/css" /> -->
   <link href="css/librairies/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="css/editmode.css" />
   <link href="css/librairies/jquery-ui.min.css" rel="stylesheet" type="text/css" />
   <script src="js/librairies/jquery.min.js"></script>
   <script src="js/librairies/jquery-ui.min.js"></script>
-  <!-- <script src="js/librairies/vis.js"></script> -->
   <script src="js/librairies/vis-timeline-graph2d.min.js"></script>
   <script src="js/timelinebasic.js"></script>
   <script src="js/editmodesetup.js"></script>
@@ -33,7 +31,7 @@
 
   <header>
     <h1 title="A tool to visualize the passing of time">Simple Timeline</h1>
-    <h2 id="timelineTitle" tabindex="0" aria-role="button" title="Change the Title">Timeline's title</h2>
+    <h2 id="timelineTitle" tabindex="0" role="button" title="Change the Title">Timeline's title</h2>
     <div>
       <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
       <button id="btnShare">Partager</button>
@@ -59,7 +57,10 @@
     <button onclick="toggleImporter()">Import timeline</button>
     <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
       <button onclick="toggleImporter()">x</button>
-      <p>Drag and drop a .timeline file here</p>
+      <p>
+        Drag and drop a .timeline file here </br>
+        (This will replace the current timeline)
+      </p>
       <!-- <input type="file"> -->
     </div>
     <button onclick="exportTimeline()">Export timeline</button>
@@ -67,9 +68,9 @@
 
   </nav>
   <main>
-    <div tabindex="0" aria-role="button" class="dateIndicator" title="Change the timeline's Start Date">01-01-2000</div>
-    <p tabindex="0" aria-role="button" id="description" title="Change the description"></p>
-    <div tabindex="0" aria-role="button" class="dateIndicator" title="Change the timeline's End Date">31-12-2099</div>
+    <div tabindex="0" role="button" class="dateIndicator" title="Change the timeline's Start Date">01-01-2000</div>
+    <p tabindex="0" role="button" id="description" title="Change the description"></p>
+    <div tabindex="0" role="button" class="dateIndicator" title="Change the timeline's End Date">31-12-2099</div>
 
 
     <div id=btnContainer>
