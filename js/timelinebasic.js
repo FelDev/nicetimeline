@@ -15,15 +15,16 @@ $(document).ready(function () {
     item = new vis.DataSet();
     group = new vis.DataSet();
 
-    $('#btnAutoScroll').on('click', function () {
-        // À peaufiner (beaucoup) pour que la vitesse soit adéquate à tout niveau de zoom
-        // S'il y a au moins 1 item
-        if (item.length > 0) {
-            let maxDate = item.max("end");
-            let duration = (timeline.components[0].end - timeline.components[0].start) / 5000000;
-            timeline.focus([maxDate.id], { animation: { duration: duration, easingFunction: 'linear' } }); // ms
-        }
-    });
+    
+    // $('#btnAutoScroll').on('click', function () {
+    //     // À peaufiner (beaucoup) pour que la vitesse soit adéquate à tout niveau de zoom
+    //     // S'il y a au moins 1 item
+    //     if (item.length > 0) {
+    //         let maxDate = item.max("end");
+    //         let duration = (timeline.components[0].end - timeline.components[0].start) / 5000000;
+    //         timeline.focus([maxDate.id], { animation: { duration: duration, easingFunction: 'linear' } }); // ms
+    //     }
+    // });
 
     $('#btnMoveToFirstItem').on('click', function () {
         // S'il y a au moins un item
