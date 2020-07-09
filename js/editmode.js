@@ -7,7 +7,7 @@ $(document).ready(function () {
   // Bouton de sauvegarde
   // $('#btnSave').on('click', saveTimeline);
 
-  $('h2')
+  $('#timelineTitle')
   .on('click', changeTitle1)
   .on('keypress', function(e) {
     if(e.keyCode == 13) {
@@ -61,8 +61,9 @@ function cancelChangeDesc() {
 }
 
 function cancelChangeTitle() {
-  $("#newTitleTemp").replaceWith("<h2>" + oldTitle + "</h2>");
-  $('h2')
+  $("#newTitleTemp").replaceWith(`
+    <h2 id="timelineTitle" tabindex="0" aria-role="button" title="Change the Title">${oldTitle}</h2>`);
+  $('#timelineTitle')
   .on('click', changeTitle1)
   .on('keypress', function(e) {
     if(e.keyCode == 13) {
@@ -91,18 +92,24 @@ function changeDesc2() {
 }
 
 function changeTitle1() {
-  oldTitle = $("h2").html();
+  oldTitle = $("#timelineTitle").html();
 
-  $("h2").replaceWith("<div id='newTitleTemp'><input id='inputTitle'></input><button onclick='changeTitle2()'>Ok!</button>" +
-    "<button onclick='cancelChangeTitle()'>Cancel</button></div>");
+  $("#timelineTitle").replaceWith(`
+    <div id='newTitleTemp'>
+      <input id='inputTitle'></input>
+      <button onclick='changeTitle2()'>Ok!</button>
+      <button onclick='cancelChangeTitle()'>Cancel</button>
+    </div>`);
   $("#inputTitle").val(oldTitle);
 }
 
 function changeTitle2() {
   let newTitle = $("#newTitleTemp #inputTitle").val();
 
-  $("#newTitleTemp").replaceWith("<h2 title='Change the title'>" + newTitle + "</h2>");
-  $('h2')
+  $("#newTitleTemp").replaceWith(`
+    <h2 id="timelineTitle" tabindex="0" aria-role="button" title="Change the Title">${newTitle}</h2>`);
+    
+  $('#timelineTitle')
   .on('click', changeTitle1)
   .on('keypress', function(e) {
     if(e.keyCode == 13) {
@@ -157,14 +164,6 @@ function clearTimeline() {
     lineCount--;
     
   })
-  // old way #DELETE
-  // for (let key in timeline.groupsData._data._data) {
-    // let obj = timeline.groupsData._data._data[key];
-    // group.remove({
-      // id: obj.id
-    // });
-    // lineCount--;
-  // }
 }
 
 function loadTimeline(info) {
@@ -259,7 +258,7 @@ function exportTimeline() {
     id: idTimeline,
     version: 1.0,
     description: $("#description").html(),
-    name: $("h2").html(),
+    name: $("#timelineTitle").html(),
     public: !($("#checkBoxPrivate").is(":checked")),
     start_date: $(".dateIndicator:nth-of-type(1)").html(),
     end_date: $(".dateIndicator:nth-of-type(2)").html()
@@ -276,19 +275,6 @@ function exportTimeline() {
     allLine.push(line);
     
   })
-  // old way #DELETE
-  // for (let key in timeline.groupsData._data._data) {
-  //   console.log('@key: ', key);
-    
-  //   let obj = timeline.groupsData._data._data[key];
-  //   line = {
-  //     name: obj.content,
-  //     order: obj.order,
-  //     id: obj.id,
-  //     allPeriod: []
-  //   }
-  //   allLine.push(line);
-  // }
 
   // Puis ajouter tous les items (période) dans le tableau d'items de leur ligne respective
   timeline.itemsData.forEach(element => {
@@ -313,7 +299,7 @@ function exportTimeline() {
   let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(timelineGeneral));
   let dlAnchorElem = document.getElementById('exportTimeline');
   dlAnchorElem.setAttribute("href", dataStr);
-  const fileName = `${$("h2").html()}_${makeValid(new Date())}.timeline`
+  const fileName = `${$("#timelineTitle").html()}_${makeValid(new Date())}.timeline`
 
   dlAnchorElem.setAttribute("download", fileName);
   dlAnchorElem.click();

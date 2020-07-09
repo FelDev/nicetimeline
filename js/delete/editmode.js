@@ -19,7 +19,7 @@ function saveTimeline() {
   let timelineGeneral = {
     id: idTimeline,
     description: $("#description").html(),
-    name: $("h2").html(),
+    name: $("#timelineTitle").html(),
     public: !($("#checkBoxPrivate").is(":checked")),
     start_date: $(".dateIndicator:nth-of-type(1)").html(),
     end_date: $(".dateIndicator:nth-of-type(2)").html()
