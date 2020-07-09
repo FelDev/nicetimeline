@@ -190,7 +190,8 @@ button {
 
 #description {
   border-radius: .5rem;
-  transition: .5s
+  transition: .5s;
+  cursor: pointer;
 }
 
 #description:hover {
@@ -250,7 +251,8 @@ button {
   font-size: 2rem;
   position: absolute;
   top: 0;
-  transition: .5s
+  transition: .5s;
+  cursor: pointer;
 }
 
 .dateIndicator:nth-of-type(1) {
@@ -324,7 +326,8 @@ h2 {
   font-size: 3rem;
   line-height: 4rem;
   padding-top: .5rem;
-  transition: .5s
+  transition: .5s;
+  cursor: pointer;
 }
 
 header h2:hover {

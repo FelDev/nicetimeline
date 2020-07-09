@@ -7,9 +7,21 @@ $(document).ready(function () {
   // Bouton de sauvegarde
   // $('#btnSave').on('click', saveTimeline);
 
-  $('h2').on('click', changeTitle1);
+  $('h2')
+  .on('click', changeTitle1)
+  .on('keypress', function(e) {
+    if(e.keyCode == 13) {
+      changeTitle1();
+    }
+  });
 
-  $('#description').on('click', changeDesc1);
+  $('#description')
+  .on('click', changeDesc1)
+  .on('keypress', function(e) {
+    if(e.keyCode == 13) {
+      changeDesc1();
+    }
+  });
 
   //  Création d'une nouvelle timeline
   $("nav a:nth-of-type(2)").on('click', function () {
@@ -50,7 +62,13 @@ function cancelChangeDesc() {
 
 function cancelChangeTitle() {
   $("#newTitleTemp").replaceWith("<h2>" + oldTitle + "</h2>");
-  $('h2').on('click', changeTitle1);
+  $('h2')
+  .on('click', changeTitle1)
+  .on('keypress', function(e) {
+    if(e.keyCode == 13) {
+      changeTitle1();
+    }
+  });
 }
 
 function changeDesc1() {
@@ -84,7 +102,13 @@ function changeTitle2() {
   let newTitle = $("#newTitleTemp #inputTitle").val();
 
   $("#newTitleTemp").replaceWith("<h2 title='Change the title'>" + newTitle + "</h2>");
-  $('h2').on('click', changeTitle1);
+  $('h2')
+  .on('click', changeTitle1)
+  .on('keypress', function(e) {
+    if(e.keyCode == 13) {
+      changeTitle1();
+    }
+  });
   changesSaved = false;
 }
 

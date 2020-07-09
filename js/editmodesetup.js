@@ -217,8 +217,14 @@ $(document).ready(function () {
     });
 
     // Changement de la date de fin de la timeline    
-    $('.dateIndicator:nth-of-type(2)').on('click', function () {
+    $('.dateIndicator:nth-of-type(2)')
+    .on('click', function () {
         $("#modalChangeEndDate").dialog("open");
+    })
+    .on('keypress', function(e) {
+        if(e.keyCode == 13) {
+            $("#modalChangeEndDate").dialog("open");
+        }
     });
     $("#modalChangeEndDate").dialog({
         autoOpen: false,
@@ -255,6 +261,11 @@ $(document).ready(function () {
     // Changement de la date de début de la timeline    
     $('.dateIndicator:nth-of-type(1)').on('click', function () {
         $("#modalChangeStartDate").dialog("open");
+    })
+    .on('keypress', function(e) {
+        if(e.keyCode == 13) {
+            $("#modalChangeStartDate").dialog("open");
+        }
     });
     $("#modalChangeStartDate").dialog({
         autoOpen: false,
