@@ -25,14 +25,21 @@ $(document).ready(function () {
     //         timeline.focus([maxDate.id], { animation: { duration: duration, easingFunction: 'linear' } }); // ms
     //     }
     // });
-
+    
     $('#btnMoveToFirstItem').on('click', function () {
         // S'il y a au moins un item
         if (item.length > 0) {
             // Trouver la date du premier élément...
-            let minDate = item.min("start");
+            let first = new Date(item.get()[0].start);
+            item.forEach(i => {
+                let d = new Date(i.start)
+                if (d < first) {
+                    first = d
+                }
+            })
+            // let minDate = item.min("start"); // should work but doesn't 🤷‍♀️
             // Et y aller!
-            timeline.moveTo(minDate.start);
+            timeline.moveTo(first);
         }
     });
 

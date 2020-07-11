@@ -162,8 +162,8 @@ function clearTimeline() {
       id: g.id
     });
     lineCount--;
-    
   })
+  item.clear()
 }
 
 function loadTimeline(info) {
@@ -308,6 +308,7 @@ function exportTimeline() {
 
 function startNewTimeline() {
   clearTimeline()
+  // #RENDUICI: popup: choose name, dates, etc...
 }
 
 function showDemoTimeline() {

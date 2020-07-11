@@ -176,6 +176,39 @@ $(document).ready(function () {
         minWidth: 600
     });
 
+    $("#modalNewTimeline").dialog({
+        autoOpen: false,
+        buttons: {
+            "Créer la timeline!": function() {
+                
+                let name = $("#newTimelineName").val();
+                let description = $("#newTimelineDescription").val();
+                let startDate = $("#newTimelineDatePickerStart").val();
+                let endDate = $("#newTimelineDatePickerEnd").val();
+
+                // Vérification des dates...
+                if(endDate < startDate) {
+                    $("#modalNewTimeline p:last-of-type").html("La date de fin doit être après la date de début!");
+                }
+                // Vérification du titre...
+                else if(name == ""){
+                    $("#modalNewTimeline p:last-of-type").html("La timeline doit avoir un titre!");
+                }    
+                // On crée une Timeline dans la BD via AJAX avant de rediriger vers la page d'édition qui contiendra la nouvelle timeline
+                else {
+                    saveNewTimeline(name, startDate, endDate, description);
+                    $(this).dialog( "close" );              
+                }
+                    
+            },
+            "Annuler": function() {
+                $(this).dialog( "close" );
+            }
+        },
+        minHeight: 200,  
+        minWidth: 800  
+    });
+
     // Gestion de l'ajout de nouvelles ligne via le bouton #btnAddLine    
     $('#btnAddLine').on('click', function () {
         $('#lineName').val("");
