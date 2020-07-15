@@ -22,6 +22,9 @@
   <script src="js/timelinebasic.js"></script>
   <script src="js/editmodesetup.js"></script>
   <script src="js/editmode.js"></script>
+  <script src="node_modules/moment/min/moment.min.js"></script>
+  <script src="node_modules/pikaday/pikaday.js"></script>
+
   <!-- <script src="js/savenewtimeline.js"></script> -->
   <script src="js/dateformatchecker.js"></script>
 
@@ -205,11 +208,11 @@
       </p>
       <p>
         <label for="datePickerStart">Start Date: </label>
-        <input type="text" id="datePickerStart">
+        <input type="text" id="datePickerStart" autocomplete="off">
       </p>
       <p>
         <label for="datePickerEnd">End Date: </label>
-        <input type="text" id="datePickerEnd">
+        <input type="text" id="datePickerEnd" autocomplete="off">
       </p>
       <p></p>
     </div>
