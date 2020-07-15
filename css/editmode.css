@@ -52,7 +52,7 @@ nav button, #btnContainer button {
 
 h1 {
   color: #00d;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-family: vengeance
 }
 

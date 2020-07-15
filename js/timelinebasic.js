@@ -7,6 +7,29 @@ let timeline;
 let container;
 let itemTemplate;
 
+function moveToFirstItem() {
+    // S'il y a au moins un item
+    if (item.length > 0) {
+        // Trouver la date du premier élément...
+        let first = new Date(item.get()[0].start);
+        item.forEach(i => {
+            let d = new Date(i.start)
+            if (d < first) {
+                first = d
+            }
+        })
+        // let minDate = item.min("start"); // should work but doesn't 🤷‍♀️
+        // Et y aller!
+        timeline.moveTo(first);
+    }
+}
+
+function showAllLine() {
+    group.forEach(function (g) {
+        group.update({ id: g.id, visible: true });
+    })
+};
+
 $(document).ready(function () {
 
     // La timeline sera attachée à cet élément du DOM
@@ -25,33 +48,7 @@ $(document).ready(function () {
     //         timeline.focus([maxDate.id], { animation: { duration: duration, easingFunction: 'linear' } }); // ms
     //     }
     // });
-    
-    $('#btnMoveToFirstItem').on('click', function () {
-        // S'il y a au moins un item
-        if (item.length > 0) {
-            // Trouver la date du premier élément...
-            let first = new Date(item.get()[0].start);
-            item.forEach(i => {
-                let d = new Date(i.start)
-                if (d < first) {
-                    first = d
-                }
-            })
-            // let minDate = item.min("start"); // should work but doesn't 🤷‍♀️
-            // Et y aller!
-            timeline.moveTo(first);
-        }
-    });
 
-    $('#btnShowAllLine').on('click', function () {
-        group.forEach(function (g) {
-            group.update({ id: g.id, visible: true });
-        })
-    });
-
-    $('h1').on('click', function () {
-        window.location = "/";
-    });
 })
 
 
@@ -69,9 +66,9 @@ function finishSetup() {
             timeline.fit();
         }
         else {
-            $("#modalInfoItem p:nth-of-type(1)").html(itemToShow.description);
+            document.querySelector("#modalInfoItem p:nth-of-type(1)").html(itemToShow.description);
 
-            $("#modalInfoItem").dialog({ title: itemToShow.name })
+            document.querySelector("#modalInfoItem").dialog({ title: itemToShow.name })
                 .dialog("open");
         }
     });
