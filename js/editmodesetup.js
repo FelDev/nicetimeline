@@ -116,14 +116,24 @@ $(document).ready(function () {
         console.log("groupDragged");
     })
 
+    let datePickersIDs = [
+        'datePickerStart',
+        'datePickerEnd',
+        "editedEventDatePickerStart", 
+        "editedEventDatePickerEnd",
+        "datePickerTimelineStart", 
+        "datePickerTimelineEnd"
+    ]
 
-    // Attribution des datepicker...
-    $("#datePickerStart, #datePickerEnd, #editedEventDatePickerStart, #editedEventDatePickerEnd, #datePickerTimelineStart, #datePickerTimelineEnd").datepicker({
-        dateFormat: "yy-mm-dd",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-100:+10"
-    });
+    datePickersIDs.forEach(dpID => {
+        new Pikaday({ 
+            field: document.getElementById(dpID),
+            format: "YYYY-MM-DD",
+            yearRange: 100, // #TODO: should be set to [timeline's start date, timeline's end date]
+            theme: "dark-theme"
+
+        });
+    })
 
     // Gestion de l'ajout de nouvelles périodes et événements
     // (appelé par btnAddEvent, présent sur chaque ligne, ou context-click sur la timeline)
