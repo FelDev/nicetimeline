@@ -124,7 +124,7 @@
     <form onsubmit="return false">
       <p>
         <label for="datePickerTimelineEnd">End Date: </label>
-        <input type="text" id="datePickerTimelineEnd">
+        <input type="text" id="datePickerTimelineEnd" autocomplete="off">
       </p>
 
       <p class="alert"></p>
@@ -146,7 +146,7 @@
     <form onsubmit="return false">
       <p>
         <label for="datePickerTimelineStart">Start Date: </label>
-        <input type="text" id="datePickerTimelineStart">
+        <input type="text" id="datePickerTimelineStart" autocomplete="off">
       </p>
       <p class="alert"></p>
       <br>
@@ -334,11 +334,11 @@
       </p>
       <p>
         <label for="editedEventDatePickerStart">Start date:</label>
-        <input type="text" id="editedEventDatePickerStart">
+        <input type="text" id="editedEventDatePickerStart" autocomplete="off">
       </p>
       <p>
         <label for="editedEventDatePickerEnd">End date:</label>
-        <input type="text" id="editedEventDatePickerEnd">
+        <input type="text" id="editedEventDatePickerEnd" autocomplete="off">
       </p>
 
       <p class="alert"></p>
@@ -351,7 +351,7 @@
     
   </div>
 
-  <div id="modalEditLine" title="Rename or delete this line" class="modal">
+  <div id="modalEditLine" title="Rename or delete this line" class="modal" draggable="true">
     <header>
       <h6>Rename or delete this line</h6>
       <button title="close" onclick="closeModal('modalEditLine')">X</button>
