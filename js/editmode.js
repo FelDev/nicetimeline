@@ -23,31 +23,6 @@ $(document).ready(function () {
     }
   });
 
-  //  Création d'une nouvelle timeline
-  $("nav a:nth-of-type(2)").on('click', function () {
-    $("#modalNewTimelineSaveFirst").dialog("open");
-  })
-
-  $("#modalNewTimelineSaveFirst").dialog({
-    autoOpen: false,
-    buttons: {
-      "Yes": function () {
-        // saveTimeline();
-        $("#modalNewTimelineSaveFirst").dialog("close");
-        $("#modalNewTimeline").dialog("open");
-        $("#modalNewTimeline p:last-of-type").html("La timeline précédente a été enregistré.");
-      },
-      "No": function () {
-        $("#modalNewTimelineSaveFirst").dialog("close");
-        $("#modalNewTimeline").dialog("open");
-      },
-      "Cancel": function () {
-        $("#modalNewTimelineSaveFirst").dialog("close");
-      }
-    },
-    minHeight: 200,
-    minWidth: 400
-  });
   showDemoTimeline();
 });
 

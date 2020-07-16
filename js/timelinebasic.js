@@ -61,15 +61,16 @@ function finishSetup() {
     timeline.on("doubleClick", function (properties) {
         let itemID = properties.item;
         let itemToShow = item.get(itemID)
-
+        
         if (itemID == null) {
             timeline.fit();
         }
         else {
-            document.querySelector("#modalInfoItem p:nth-of-type(1)").html(itemToShow.description);
-
-            document.querySelector("#modalInfoItem").dialog({ title: itemToShow.name })
-                .dialog("open");
+            let description = itemToShow.description == "" ? "(no description)" : itemToShow.description;
+            document.querySelector("#modalInfoItem p:nth-of-type(1)").innerHTML = description;
+            document.querySelector("#modalInfoItem header h6").innerHTML = itemToShow.name;
+            
+            showModal("modalInfoItem")
         }
     });
 }

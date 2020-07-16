@@ -83,6 +83,68 @@ textarea {
   font-weight: bold;
 }
 
+.modal {
+  transition: 0.5s all;
+  opacity: 0;
+  transform: translate(-50%, 50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: #ede7f4;
+  overflow: scroll;
+  border: 0.2em solid #2b8aee;
+  border-radius: 1rem;
+  max-height: 98vh;
+  width: 99vw;
+  box-shadow: #333 0em 0em 0rem;
+  max-width: 80em;
+  z-index: -1;
+}
+
+.modal.show {
+  transition: 0.5s all;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  box-shadow: #333 0em 0em 1.5rem;
+  z-index: 999;
+}
+
+.modal header {
+  align-items: center;
+  border-bottom: 0.2em solid #2b8aee;
+  min-height: 0; 
+}
+
+.modal header h6 {
+  font-size: 3rem;
+  
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 2.5rem;
+  max-width: 60rem;
+  margin: auto;
+}
+
+.modal form p {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.modal form input,
+.modal form textarea,
+.modal form select {
+  padding: 0.5rem;
+}
+
+.modal form .buttons {
+  text-align: right;
+}
+
 .vis-label .vis-inner {
   min-height: 5.2rem
 }
@@ -505,9 +567,7 @@ button {
   transition: .5s
 }
 
-#modalAddLine p:last-of-type,
-#modalEditEvent p:last-of-type,
-#modalAddEvent p:last-of-type {
+p.alert {
   color: red
 }
 
