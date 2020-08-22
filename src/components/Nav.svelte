@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	export let segment;
 </script>
 
@@ -54,4 +54,4 @@
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
 		<li><a aria-current='{segment === "loggedin" ? "page" : undefined}' href='loggedin'>loggedin</a></li>
 	</ul>
-</nav>
+</nav> -->
