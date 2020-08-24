@@ -1,5 +1,5 @@
 <script>
-  import {description, changesSaved} from './stores.js';
+  import {description, changesSaved} from './TheTimeline.js';
   let changingDesc = false;
   let newDesc = "";
 

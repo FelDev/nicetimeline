@@ -1,57 +1,81 @@
-<!-- <script>
-	export let segment;
+<script>
+    import {
+        description,
+        title,
+        changesSaved,
+    } from "../components/TheTimeline.js";
+    import TheTimeline from "../components/TheTimeline.js";
+
+    function startNewTimeline() {
+        TheTimeline.clearTimeline();
+        // #RENDUICI: popup: choose name, dates, etc...
+    }
+    function toggleImporter() {
+        document.getElementById("drop_zone").classList.toggle("show");
+    }
+
+    function dropHandler(ev) {
+        // Prevent default behavior (Prevent file from being opened)
+        ev.preventDefault();
+        try {
+            if (ev.dataTransfer.items) {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    let data;
+                    try {
+                        data = JSON.parse(this.result);
+                    } catch (err) {
+                        return alert("This file appears to be invalid. :|");
+                    }
+                    TheTimeline.loadTimeline(data);
+                    toggleImporter();
+                };
+
+                reader.readAsText(ev.dataTransfer.files[0]);
+            }
+        } catch (err) {
+            alert("This file appears to be invalid. :|");
+        }
+    }
+
+    function dragOverHandler(ev) {
+        // console.log('File(s) in drop zone');
+        ev.preventDefault();
+    }
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
 </style>
 
 <nav>
-	<ul>
-		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
-		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
-		<li><a aria-current='{segment === "loggedin" ? "page" : undefined}' href='loggedin'>loggedin</a></li>
-	</ul>
-</nav> -->
+    <!-- Les liens du nav appel la fonction changeMenu pour enlever ledit menu une fois qu'on se fait rediriger (sur mobile)-->
+    <!-- <a href="account.php">
+      Toutes mes timelines
+    </a>
+    <a href="#">
+      Créer une nouvelle timeline
+    </a>
+    <a href="account.php">
+      Gestion du compte
+    </a> -->
+
+    <button on:click={TheTimeline.showDemoTimeline}>Show demo timeline</button>
+    <button on:click={startNewTimeline}>New timeline</button>
+    <button on:click={toggleImporter}>Import timeline</button>
+    <div
+        id="drop_zone"
+        on:drop={(e)=>dropHandler(e)}
+        on:dragover={(e) => dragOverHandler(e)}>
+        <button on:click={toggleImporter}>x</button>
+        <p>
+            Drag and drop a .timeline file here
+            <br />
+            (This will replace the current timeline)
+        </p>
+        <!-- <input type="file"> -->
+    </div>
+    <button on:click={TheTimeline.exportTimeline}>Export timeline</button>
+    <a id="exportTimeline" style="display: none;">Export timeline</a>
+
+</nav>

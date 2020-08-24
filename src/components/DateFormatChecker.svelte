@@ -1,11 +1,11 @@
-<script>
+<script context="module">
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // * dateformatchecker.js
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // isValidDate() est un Copié/collé à peine modifié:
   // https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript/6178341#6178341
   // Validates that the input string is a valid date formatted as "YYYY/MM/DD"
-  function isValidDate(dateString) {
+  export function isValidDate(dateString) {
       
       // First check for the pattern
       let regex_date = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
@@ -36,7 +36,7 @@
       return day > 0 && day <= monthLength[month - 1];
   }
 
-  function makeValid(date) {
+  export function makeValid(date) {
       // Utile parce que quand on bouge les éléments de la timeline, le format de date devient un Objet JS.
       // makeValid() est très fortement inspiré par https://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date
       if(date == null) {

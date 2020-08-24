@@ -1,5 +1,5 @@
 <script>
-  import {title, changesSaved} from './stores.js';
+  import {title, changesSaved} from './TheTimeline.js';
   let changingTitle = false;
   let newTitle = "";
 
