@@ -111,27 +111,9 @@
   import Nav from "../components/Nav.svelte";
   import {description, title, changesSaved} from '../components/TheTimeline.js';
   import TheTimeline from "../components/TheTimeline.js"
+  import {showModal, closeModal} from '../components/modals/ModalsCommon.svelte'
 
   let Pikaday;
-  
-  function showModal(modalID, type, data) {
-      console.log('@modalID', modalID);
-      if (type == "EditLine") {
-      }
-      document.getElementById(modalID).classList.add('show')
-      document.addEventListener("keyup", e => closeModalWithEsc(e, modalID));
-  }
-
-  function closeModal(modalID) {
-      document.getElementById(modalID).classList.remove('show')
-      // #TODO: removeEventListener() ?
-  }
-
-  function closeModalWithEsc(e, modalID) {
-      if (e.key == "Escape" || e.keyCode == 27) {
-          closeModal(modalID)
-      }
-  }
 
   onMount(async () => {
     const module = await import('pikaday');

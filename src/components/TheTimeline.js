@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store';
 import jquery from "jquery";
 import {isValidDate, makeValid} from './DateFormatChecker.svelte'
+import {showModal} from './modals/ModalsCommon.svelte'
 
 export const description = writable("");
 export const title = writable("");
@@ -22,21 +23,6 @@ export default {
 	clearTimeline,
 	exportTimeline,
 	showDemoTimeline,
-}
-
-// #TODO: showModal()  and closeModalWithEsc() is duplicated in index.svelte
-function showModal(modalID, type, data) {
-	console.log('@modalID', modalID);
-	if (type == "EditLine") {
-
-	}
-	document.getElementById(modalID).classList.add('show')
-	document.addEventListener("keyup", e => closeModalWithEsc(e, modalID));
-}
-function closeModalWithEsc(e, modalID) {
-	if (e.key == "Escape" || e.keyCode == 27) {
-			closeModal(modalID)
-	}
 }
 
 let option; // option contient toutes les options de configuration de la timeline
