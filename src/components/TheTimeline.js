@@ -562,7 +562,8 @@ function exportTimeline() {
 	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(timelineGeneral));
 	let dlAnchorElem = document.getElementById('exportTimeline');
 	dlAnchorElem.setAttribute("href", dataStr);
-	let beginningOfFileName = get(title) == "" ? "your_timeline" : title;
+	let currentTitle = get(title);
+	let beginningOfFileName = currentTitle == "" ? "your_timeline" : currentTitle;
 	const fileName = `${beginningOfFileName}_${makeValid(new Date())}.timeline`
 
 	dlAnchorElem.setAttribute("download", fileName);

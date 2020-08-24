@@ -130,7 +130,6 @@
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // * editmodesetup.js
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // Se trouve dans timelinebasic.js
     TheTimeline.finishSetup();
       
     let datePickersIDs = [
@@ -150,64 +149,26 @@
             theme: "dark-theme"
 
         });
-    })
-      
-    // jquery("#modalEditLine").dialog({
-    //     autoOpen: false,
-    //     buttons: {
-    //         "Delete this line": function () {
-    //             jquery("#modalEditLine").dialog("close");
-    //             jquery("#modalRemoveLine").data('groupID', jquery("#modalEditLine").data("groupID"))
-    //                 .data('order', jquery("#modalEditLine").data("order"))
-    //                 .dialog("open");
-    //         },
-    //         "Cancel": function () {
-    //             jquery("#modalEditLine").dialog("close");
-    //         }
-    //     },
-    //     close: function () {
-    //         jquery("#modalEditLine p:last-of-type").html("");
-    //     },
-    //     minHeight: 200,
-    //     minWidth: 400
-    // });
-
-    // Sert à afficher des messages de confirmation à l'usager (ex: "Timeline bien sauvegardé")
-    // Only used by now defunct saveTimeline() function
-    // jquery("#modalQuickAlert").dialog({
-    //     autoOpen: false,
-    //     show: {
-    //         effect: "blind",
-    //         duration: 500
-    //     },
-    //     hide: {
-    //         effect: "blind",
-    //         duration: 500
-    //     }
-    // });
-
+    });
+    TheTimeline.showDemoTimeline();
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // * editmodesetup.js
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // * editmode.js
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // Bouton de sauvegarde
-    // jquery('#btnSave').on('click', saveTimeline);
-    TheTimeline.showDemoTimeline();
-
-    window.onbeforeunload = function () {
+    // Warn user if about to quit with unsaved changes
+    // window.onbeforeunload = function () {
       // if (changesSaved) {
       //   ;
       // } else {
       //   return "Vos dernières modifications n'ont pas été enregistré.";
       // }
-    };
+    // };
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // * editmode.js
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
   })
-
 
 </script>

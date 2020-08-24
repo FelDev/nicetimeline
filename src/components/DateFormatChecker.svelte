@@ -1,7 +1,4 @@
 <script context="module">
-  // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  // * dateformatchecker.js
-  // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // isValidDate() est un Copié/collé à peine modifié:
   // https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript/6178341#6178341
   // Validates that the input string is a valid date formatted as "YYYY/MM/DD"
@@ -48,7 +45,4 @@
 
       return newDate;
   }
-  // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  // * dateformatchecker.js
-  // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 </script>
