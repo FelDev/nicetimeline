@@ -10,7 +10,6 @@ export const changesSaved = writable(false );
 export default {
 	setupTimeline,
 	loadTimeline,
-	finishSetup,
 	addLine,
 	deleteLine,
 	updateLineName,
@@ -39,99 +38,150 @@ let lineBeingEdited = {};
 
 let editedItemID = null;
 
-	option = {
-			horizontalScroll: true,
-			zoomKey: "ctrlKey",
-			zoomFriction: 33,
-			editable: {
-					add: false,
-					updateTime: true,
-					updateGroup: true,
-					remove: true,
-					overrideItems: false
-			},
-			groupEditable: true,
-			groupOrder: function (a, b) {
-					return a.order - b.order;
-			},
-			groupOrderSwap: function (a, b, groups) {
-					let v = a.order;
-					a.order = b.order;
-					b.order = v;
-			},
-			groupTemplate: function (group) {
-					let container = document.createElement('div');
-					let label = document.createElement('span');
-					label.innerHTML = group.content + ' ';
-					container.insertAdjacentElement('afterBegin', label);
-					// Cacher une ligne se fait via btnHide
-					let btnHide = document.createElement('button');
-					btnHide.innerHTML = 'Hide';
-					btnHide.title = "Hide this line";
-					btnHide.style.fontSize = 'small';
-					btnHide.addEventListener('click', function () {
-							hideGroup(group.id);
-					});
-					container.insertAdjacentElement('beforeEnd', btnHide);
-					// Suppression d'une ligne se fait via btnEdit
-					let btnEdit = document.createElement('button');
-					btnEdit.innerHTML = 'Edit';
-					btnEdit.title = "Modify or delete this line";
-					btnEdit.style.fontSize = 'small';
-					btnEdit.addEventListener('click', function () {
-							lineBeingEdited.id = group.id;
-							showModal("modalEditLine", "EditLine", {
-									groupID: group.id,
-									groupOrder: group.order
-							})
-					});
-					container.insertAdjacentElement('beforeEnd', btnEdit);
-					// Ajout d'événements se fait via btnAddEvent
-					let btnAddEvent = document.createElement('button');
-					btnAddEvent.innerHTML = '+';
-					btnAddEvent.title = "Add an event";
-					btnAddEvent.style.fontSize = 'small';
-					btnAddEvent.addEventListener('click', function () {
-							jquery('#newEventTitle').val("");
-							jquery('#datePickerStart').val("");
-							jquery('#datePickerEnd').val("");
-							jquery('#newEventDesc').val("");
-							lineBeingEdited.id = group.id;
-							console.log('@lineBeingEdited: ', lineBeingEdited);
-							
-							showModal("modalAddEvent");
-					});
-					container.insertAdjacentElement('beforeEnd', btnAddEvent);
-					return container;
-			},
-			max: "3000-01-01",
-			min: "1000-01-01",
-			snap: null,
-			template: function (item) {
-					return '<p>' + item.name + '</p>';
-			},
-			zoomMax: 31556952000000, //1000 ans
-			zoomMin: 86400000 // 24 heures
-	};
+option = {
+		horizontalScroll: true,
+		zoomKey: "ctrlKey",
+		zoomFriction: 33,
+		editable: {
+				add: false,
+				updateTime: true,
+				updateGroup: true,
+				remove: true,
+				overrideItems: false
+		},
+		groupEditable: true,
+		groupOrder: function (a, b) {
+				return a.order - b.order;
+		},
+		groupOrderSwap: function (a, b, groups) {
+				let v = a.order;
+				a.order = b.order;
+				b.order = v;
+		},
+		groupTemplate: function (group) {
+				let container = document.createElement('div');
+				let label = document.createElement('span');
+				label.innerHTML = group.content + ' ';
+				container.insertAdjacentElement('afterBegin', label);
+				// Cacher une ligne se fait via btnHide
+				let btnHide = document.createElement('button');
+				btnHide.innerHTML = 'Hide';
+				btnHide.title = "Hide this line";
+				btnHide.style.fontSize = 'small';
+				btnHide.addEventListener('click', function () {
+						hideGroup(group.id);
+				});
+				container.insertAdjacentElement('beforeEnd', btnHide);
+				// Suppression d'une ligne se fait via btnEdit
+				let btnEdit = document.createElement('button');
+				btnEdit.innerHTML = 'Edit';
+				btnEdit.title = "Modify or delete this line";
+				btnEdit.style.fontSize = 'small';
+				btnEdit.addEventListener('click', function () {
+						lineBeingEdited.id = group.id;
+						showModal("modalEditLine", "EditLine", {
+								groupID: group.id,
+								groupOrder: group.order
+						})
+				});
+				container.insertAdjacentElement('beforeEnd', btnEdit);
+				// Ajout d'événements se fait via btnAddEvent
+				let btnAddEvent = document.createElement('button');
+				btnAddEvent.innerHTML = '+';
+				btnAddEvent.title = "Add an event";
+				btnAddEvent.style.fontSize = 'small';
+				btnAddEvent.addEventListener('click', function () {
+						jquery('#newEventTitle').val("");
+						jquery('#datePickerStart').val("");
+						jquery('#datePickerEnd').val("");
+						jquery('#newEventDesc').val("");
+						lineBeingEdited.id = group.id;
+						console.log('@lineBeingEdited: ', lineBeingEdited);
+						
+						showModal("modalAddEvent");
+				});
+				container.insertAdjacentElement('beforeEnd', btnAddEvent);
+				return container;
+		},
+		max: "3000-01-01",
+		min: "1000-01-01",
+		snap: null,
+		template: function (item) {
+				return '<p>' + item.name + '</p>';
+		},
+		zoomMax: 31556952000000, //1000 ans
+		zoomMin: 86400000 // 24 heures
+};
 
 function setupTimeline() {
-
+	// #TODO: Make this a promise? return new Promise(function (resolve, reject) {
 	// La timeline sera attachée à cet élément du DOM
 	container = document.getElementById('timeline');
-	console.log('@container: ', container);
-
 	item = new vis.DataSet();
 	group = new vis.DataSet();
+	console.log('@container: ', container);
+	console.log('@item: ', item);
+	console.log('@option: ', option);
 
-	// jquery('#btnAutoScroll').on('click', function () {
-	//     // À peaufiner (beaucoup) pour que la vitesse soit adéquate à tout niveau de zoom
-	//     // S'il y a au moins 1 item
-	//     if (item.length > 0) {
-	//         let maxDate = item.max("end");
-	//         let duration = (timeline.components[0].end - timeline.components[0].start) / 5000000;
-	//         timeline.focus([maxDate.id], { animation: { duration: duration, easingFunction: 'linear' } }); // ms
-	//     }
-	// });
+	timeline = new vis.Timeline(container, item, option);
+	timeline.setGroups(group);
+
+	// Affichage des infos pour chaque items de la timeline + la faire fitter au complet sur double click
+	timeline.on("doubleClick", function (properties) {
+			let itemID = properties.item;
+			let itemToShow = item.get(itemID)
+			
+			if (itemID == null) {
+					timeline.fit();
+			}
+			else {
+					let description = itemToShow.description == "" ? "(no description)" : itemToShow.description;
+					document.querySelector("#modalInfoItem p:nth-of-type(1)").innerHTML = description;
+					document.querySelector("#modalInfoItem header h6").innerHTML = itemToShow.name;
+					
+					showModal("modalInfoItem")
+			}
+	});
+
+	// Gestion des clics sur les périodes/événements
+	// Permet de modifier les infos de ceux-ci
+	timeline.on('contextmenu', function (properties) {
+		editedItemID = properties.item;
+		if (editedItemID == null) {
+				// On crée un nouvel événement à partir d'ici
+				jquery('#newEventTitle').val("");
+				jquery('#datePickerStart').val(makeValid(properties.snappedTime));
+				jquery('#datePickerEnd').val("");
+				jquery('#newEventDesc').val("");
+				console.log('@lineBeingEdited: ', lineBeingEdited);
+
+				lineBeingEdited.id = properties.group;
+				console.log('@lineBeingEdited: ', lineBeingEdited);
+				showModal("modalAddEvent");
+		} else {
+				let itemEdited = item.get(editedItemID);
+
+				if (isValidDate(itemEdited.start)) {
+						jquery("#editedEventDatePickerStart").val(itemEdited.start);
+						jquery("#editedEventDatePickerEnd").val(itemEdited.end);
+				} else {
+						let start = makeValid(new Date(itemEdited.start));
+						let end = makeValid(new Date(itemEdited.end));
+						jquery("#editedEventDatePickerStart").val(start);
+						jquery("#editedEventDatePickerEnd").val(end);
+				}
+				jquery("#editedEventTitle").val(itemEdited.name);
+				jquery("#editedEventDescription").val(itemEdited.description);
+				jquery("#editedEventColor").val(itemEdited.className);
+				showModal("modalEditEvent")
+		}
+	});
+
+	// #TODO: comment détecter les changements sur la timeline?
+	// timeline.on('groupDragged', function () {
+	// 		console.log("groupDragged");
+	// })
+
 }
 
 function loadTimeline(info) {
@@ -200,77 +250,6 @@ function loadTimeline(info) {
   timeline.setOptions(option);
   timeline.redraw();
   timeline.fit();
-
-}
-
-function finishSetup() {
-	// Création de la timeline + attribution des lignes (group)
-	container = document.getElementById('timeline');
-
-	console.log('@container: ', container);
-	console.log('@item: ', item);
-	console.log('@option: ', option);
-	
-	timeline = new vis.Timeline(container, item, option);
-	timeline.setGroups(group);
-
-	// Affichage des infos pour chaque items de la timeline + la faire fitter au complet sur double click
-	timeline.on("doubleClick", function (properties) {
-			let itemID = properties.item;
-			let itemToShow = item.get(itemID)
-			
-			if (itemID == null) {
-					timeline.fit();
-			}
-			else {
-					let description = itemToShow.description == "" ? "(no description)" : itemToShow.description;
-					document.querySelector("#modalInfoItem p:nth-of-type(1)").innerHTML = description;
-					document.querySelector("#modalInfoItem header h6").innerHTML = itemToShow.name;
-					
-					showModal("modalInfoItem")
-			}
-	});
-
-		// Gestion des clics sur les périodes/événements
-    // Permet de modifier les infos de ceux-ci
-    timeline.on('contextmenu', function (properties) {
-			editedItemID = properties.item;
-			if (editedItemID == null) {
-					// On crée un nouvel événement à partir d'ici
-					jquery('#newEventTitle').val("");
-					jquery('#datePickerStart').val(makeValid(properties.snappedTime));
-					jquery('#datePickerEnd').val("");
-					jquery('#newEventDesc').val("");
-					console.log('@lineBeingEdited: ', lineBeingEdited);
-
-					lineBeingEdited.id = properties.group;
-					console.log('@lineBeingEdited: ', lineBeingEdited);
-					showModal("modalAddEvent");
-			} else {
-					let itemEdited = item.get(editedItemID);
-
-					if (isValidDate(itemEdited.start)) {
-							jquery("#editedEventDatePickerStart").val(itemEdited.start);
-							jquery("#editedEventDatePickerEnd").val(itemEdited.end);
-					} else {
-							let start = makeValid(new Date(itemEdited.start));
-							let end = makeValid(new Date(itemEdited.end));
-							jquery("#editedEventDatePickerStart").val(start);
-							jquery("#editedEventDatePickerEnd").val(end);
-					}
-					jquery("#editedEventTitle").val(itemEdited.name);
-					jquery("#editedEventDescription").val(itemEdited.description);
-					jquery("#editedEventColor").val(itemEdited.className);
-					showModal("modalEditEvent")
-			}
-	});
-
-
-	// #RENDU ICI comment détecter les changements sur la timeline?
-	timeline.on('groupDragged', function () {
-			console.log("groupDragged");
-	})
-
 
 }
 
@@ -501,7 +480,8 @@ function clearTimeline() {
 
 function exportTimeline() {
 	console.log('@export...');
-
+	
+	let currentTitle = get(title);
 	let allLine = [];
 	let line = {
 		content: null,
@@ -520,8 +500,8 @@ function exportTimeline() {
 	let timelineGeneral = {
 		id: idTimeline,
 		version: 1.0,
-		description: description,
-		name: title,
+		description: get(description),
+		name: currentTitle,
 		public: !(jquery("#checkBoxPrivate").is(":checked")),
 		start_date: jquery(".dateIndicator:nth-of-type(1)").html(),
 		end_date: jquery(".dateIndicator:nth-of-type(2)").html()
@@ -562,7 +542,6 @@ function exportTimeline() {
 	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(timelineGeneral));
 	let dlAnchorElem = document.getElementById('exportTimeline');
 	dlAnchorElem.setAttribute("href", dataStr);
-	let currentTitle = get(title);
 	let beginningOfFileName = currentTitle == "" ? "your_timeline" : currentTitle;
 	const fileName = `${beginningOfFileName}_${makeValid(new Date())}.timeline`
 

@@ -107,25 +107,14 @@
   import TheTimeline from "../components/TheTimeline.js"
   import {showModal, closeModal} from '../components/modals/ModalsCommon.svelte'
 
-  let Pikaday;
 
   onMount(async () => {
     const module = await import('pikaday');
-    Pikaday = module.default;
-    console.log('@Pikaday: ', Pikaday);
+    let Pikaday = module.default;
     
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * timelinebasic.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     TheTimeline.setupTimeline();
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * timelinebasic.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * editmodesetup.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    TheTimeline.finishSetup();
-      
+    TheTimeline.showDemoTimeline();
+    
     let datePickersIDs = [
         'datePickerStart',
         'datePickerEnd',
@@ -144,14 +133,9 @@
 
         });
     });
-    TheTimeline.showDemoTimeline();
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * editmodesetup.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * editmode.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // Warn user if about to quit with unsaved changes
+    
+    
+    // #TODO: Warn user if about to quit with unsaved changes
     // window.onbeforeunload = function () {
       // if (changesSaved) {
       //   ;
@@ -159,9 +143,6 @@
       //   return "Vos dernières modifications n'ont pas été enregistré.";
       // }
     // };
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * editmode.js
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
   })
 

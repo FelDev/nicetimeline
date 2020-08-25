@@ -3,6 +3,11 @@
   let changingTitle = false;
   let newTitle = "";
 
+  function preChangeTitle() {
+    changingTitle = true;
+    newTitle = $title;
+  }
+
   function changeTitle() {
     $title = newTitle;
     $changesSaved = false;
@@ -10,15 +15,21 @@
   }
 </script>
 
+<style>
+  input {
+    padding: 0.25rem;
+  }
+</style>
+
 {#if changingTitle}
   <div id="newTitleTemp">
-    <textarea name="newTitle" cols="40" rows="5" bind:value={newTitle}/>
+    <input name="newTitle" bind:value={newTitle}/>
     <button on:click={changeTitle}>Ok!</button>
     <button on:click={() => changingTitle = false}>Cancel</button>
   </div>
 {:else if $title == ''}
   <div id="btnAddTitle">
-    <button on:click={() => changingTitle = true}>Add a title</button>
+    <button on:click={preChangeTitle}>Add a title</button>
   </div>
 {:else}
   <h2
@@ -26,7 +37,7 @@
     role="button"
     id="timelineTitle"
     title="Change the Title"
-    on:click={() => changingTitle = true}>
+    on:click={preChangeTitle}>
     {$title}
   </h2>
 {/if}

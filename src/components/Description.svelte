@@ -3,6 +3,11 @@
   let changingDesc = false;
   let newDesc = "";
 
+  function preChangeDesc() {
+    changingDesc = true;
+    newDesc = $description;
+  }
+
   function changeDesc() {
     $description = newDesc;
     $changesSaved = false;
@@ -18,7 +23,7 @@
   </div>
 {:else if $description == ''}
   <div id="btnAddDesc">
-    <button on:click={() => changingDesc = true}>Add a description</button>
+    <button on:click={preChangeDesc}>Add a description</button>
   </div>
 {:else}
   <p
@@ -26,7 +31,7 @@
     role="button"
     id="description"
     title="Change the description"
-    on:click={() => changingDesc = true}>
+    on:click={preChangeDesc}>
     {$description}
   </p>
 {/if}
