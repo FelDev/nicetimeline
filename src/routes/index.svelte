@@ -20,7 +20,6 @@
 </svelte:head>
 
 <PageTransition>
-
   
   <header>
     <h1 title="A tool to visualize the passing of time">Simple Timeline</h1>
@@ -35,27 +34,23 @@
   </header>
   <Nav/>
   <main>
-    <div 
-      tabindex="0" 
-      role="button"
-      class="dateIndicator" 
-      title="Change the timeline's Start Date"
-      on:click={() => showModal("modalChangeStartDate")}
-    >
-      01-01-2000
+    <div id="descAndDatePickers">
+      <button 
+        class="dateIndicator" 
+        title="Change the timeline's Start Date"
+        on:click={() => showModal("modalChangeStartDate")}
+      >
+        01-01-2000
+      </button>
+      <Description />
+      <button 
+        class="dateIndicator" 
+        title="Change the timeline's End Date"
+        on:click={() => showModal("modalChangeEndDate")}
+      >
+        31-12-2099
+      </button>    
     </div>
-    <Description />
-    <div 
-      tabindex="0" 
-      role="button" 
-      class="dateIndicator" 
-      title="Change the timeline's End Date"
-      modalChangeEndDate
-      on:click={() => showModal("modalChangeEndDate")}
-    >
-      31-12-2099
-    </div>
-
 
     <div id="btnContainer">
       <div>
@@ -85,7 +80,6 @@
     on:showModal={(event) => showModal(event.detail.modalId)}/>
 
   <Footer/>
-
 
 </PageTransition>
 
