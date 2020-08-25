@@ -119,9 +119,9 @@ function setupTimeline() {
 	container = document.getElementById('timeline');
 	item = new vis.DataSet();
 	group = new vis.DataSet();
-	console.log('@container: ', container);
-	console.log('@item: ', item);
-	console.log('@option: ', option);
+	// console.log('@container: ', container);
+	// console.log('@item: ', item);
+	// console.log('@option: ', option);
 
 	timeline = new vis.Timeline(container, item, option);
 	timeline.setGroups(group);

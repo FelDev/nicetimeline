@@ -24,6 +24,7 @@
   <header>
     <h1 title="A tool to visualize the passing of time">Simple Timeline</h1>
     <Title/>
+    <Auth/>
     <div>
       <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
       <button id="btnShare">Partager</button>
@@ -91,6 +92,7 @@
   // import moment from "moment";
   import dateformatchecker from "../components/DateFormatChecker.svelte"
   import Footer from "../components/Footer.svelte";
+  import Auth from "../components/Auth.svelte";
   import Title from "../components/Title.svelte";
   import Description from "../components/Description.svelte";
   import ModalEndDate from "../components/modals/EndDate.svelte";

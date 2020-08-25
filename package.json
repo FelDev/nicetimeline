@@ -16,9 +16,11 @@
     "jquery": "^1.12.4",
     "magic-sdk": "^2.0.2",
     "moment": "^2.27.0",
+    "node-fetch": "^2.6.0",
     "pikaday": "^1.8.0",
     "polka": "next",
     "sirv": "^0.4.0",
+    "stripe": "^8.89.0",
     "vis-timeline": "^7.3.7"
   },
   "devDependencies": {

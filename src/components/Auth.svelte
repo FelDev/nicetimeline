@@ -1,51 +1,37 @@
 <script>
-  // <!-- 1️⃣ Install Magic SDK -->
-  import { Magic } from 'magic-sdk';
+  import { onMount } from "svelte";
 
-  /* 2️⃣ Initialize Magic Instance */
-  const magic = new Magic("pk_test_0BB7C67F19D5D09A");
-  console.log('@magic: ', magic);
+  let loggedIn = false;
+  const login = () => netlifyIdentity.open('login');
+  const logout = () => netlifyIdentity.logout();
+  const signup = () => netlifyIdentity.open('signup');
+  const manageSub = () => console.log('@todo manageSub');
   
-  /* 3️⃣ Implement Render Function */
-  const render = async () => {
-    console.log('@rendering...');
-    
-    const isLoggedIn = await magic.user.isLoggedIn();
-    /* Show login form if user is not logged in */
-    let html = `
-      <h1>Please sign up or login</h1>
-      <form onsubmit="handleLogin(event)">
-        <input type="email" name="email" required="required" placeholder="Enter your email" />
-        <button type="submit">Send</button>
-      </form>
-    `;
-    if (isLoggedIn) {
-      /* Get user metadata including email */
-      const userMetadata = await magic.user.getMetadata();
-      html = `
-        <h1>Current user: ${userMetadata.email}</h1>
-        <button onclick="handleLogout()">Logout</button>
-      `;
+  const updateUserInfo = (user) => {
+    if (user) {
+      loggedIn = true;
+    } else {
+      loggedIn = false;
     }
-    document.getElementById("magicDiv").innerHTML = html;
-  };
-  /* 4️⃣ Implement Login Handler */
-  const handleLogin = async e => {
-    console.log('@e: ', e);
+    console.log('@loggedIn: ', loggedIn);
     
-    e.preventDefault();
-    const email = new FormData(e.target).get("email");
-    if (email) {
-      /* One-liner login 🤯 */
-      await magic.auth.loginWithMagicLink({ email });
-      render();
-    }
   };
-  /* 5️⃣ Implement Logout Handler */
-  const handleLogout = async () => {
-    await magic.user.logout();
-    render();
+
+  const handleUserStateChange = (user) => {
+    console.log('@user: ', user);
+    updateUserInfo(user);
   };
+  onMount(async () => {
+    netlifyIdentity.on('init', handleUserStateChange);
+    netlifyIdentity.on('login', handleUserStateChange);
+    netlifyIdentity.on('logout', handleUserStateChange);
+  })
 </script>
 
-<div id="magicDiv">Loading...</div>
+{#if loggedIn}
+  <button id="logout" on:click={logout}>Log out</button>
+  <button id="mangageSub" on:click={signup}>Signup</button>
+{:else}
+  <button id="login"  on:click={login}>Log in</button>
+  <button id="signup" on:click={signup}>Signup</button>
+{/if}
