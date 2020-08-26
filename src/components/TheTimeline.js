@@ -1,5 +1,4 @@
 import { writable, get } from 'svelte/store';
-import jquery from "jquery";
 import {isValidDate, makeValid} from './DateFormatChecker.svelte'
 import {showModal} from './modals/ModalsCommon.svelte'
 
@@ -91,10 +90,10 @@ option = {
 				btnAddEvent.title = "Add an event";
 				btnAddEvent.style.fontSize = 'small';
 				btnAddEvent.addEventListener('click', function () {
-						jquery('#newEventTitle').val("");
-						jquery('#datePickerStart').val("");
-						jquery('#datePickerEnd').val("");
-						jquery('#newEventDesc').val("");
+						document.getElementById('newEventTitle').value;
+						document.getElementById('datePickerStart').value;
+						document.getElementById('datePickerEnd').value;
+						document.getElementById('newEventDesc').value;
 						lineBeingEdited.id = group.id;
 						console.log('@lineBeingEdited: ', lineBeingEdited);
 						
@@ -149,10 +148,10 @@ function setupTimeline() {
 		editedItemID = properties.item;
 		if (editedItemID == null) {
 				// On crée un nouvel événement à partir d'ici
-				jquery('#newEventTitle').val("");
-				jquery('#datePickerStart').val(makeValid(properties.snappedTime));
-				jquery('#datePickerEnd').val("");
-				jquery('#newEventDesc').val("");
+				document.getElementById('newEventTitle').value = "";
+				document.getElementById('datePickerStart').value = makeValid(properties.snappedTime);
+				document.getElementById('datePickerEnd').value = "";
+				document.getElementById('newEventDesc').value = "";
 				console.log('@lineBeingEdited: ', lineBeingEdited);
 
 				lineBeingEdited.id = properties.group;
@@ -162,17 +161,17 @@ function setupTimeline() {
 				let itemEdited = item.get(editedItemID);
 
 				if (isValidDate(itemEdited.start)) {
-						jquery("#editedEventDatePickerStart").val(itemEdited.start);
-						jquery("#editedEventDatePickerEnd").val(itemEdited.end);
+						document.getElementById("editedEventDatePickerStart").value = itemEdited.start;
+						document.getElementById("editedEventDatePickerEnd").value = itemEdited.end;
 				} else {
 						let start = makeValid(new Date(itemEdited.start));
 						let end = makeValid(new Date(itemEdited.end));
-						jquery("#editedEventDatePickerStart").val(start);
-						jquery("#editedEventDatePickerEnd").val(end);
+						document.getElementById("editedEventDatePickerStart").value = start;
+						document.getElementById("editedEventDatePickerEnd").value = end;
 				}
-				jquery("#editedEventTitle").val(itemEdited.name);
-				jquery("#editedEventDescription").val(itemEdited.description);
-				jquery("#editedEventColor").val(itemEdited.className);
+				document.getElementById("editedEventTitle").value = itemEdited.name;
+				document.getElementById("editedEventDescription").value = itemEdited.description;
+				document.getElementById("editedEventColor").value = itemEdited.className;
 				showModal("modalEditEvent")
 		}
 	});
@@ -198,8 +197,8 @@ function loadTimeline(info) {
 	console.log('@doit');
 	console.log('@info.start_date: ', info.end_date);
 	 
-  jquery('.dateIndicator:nth-of-type(1)').html(info.start_date);
-  jquery('.dateIndicator:nth-of-type(2)').html(info.end_date);
+  document.querySelector('.dateIndicator:nth-of-type(1)').innerHTML =info.start_date;
+  document.querySelector('.dateIndicator:nth-of-type(2)').innerHTML =info.end_date;
   // if (info.public == 0) {
     // jquery("#checkBoxPrivate").prop('checked', true);
   // } else {
@@ -290,10 +289,10 @@ function deleteLine() {
 }
 
 function changeStartDate(newStartDate) {
-	if (newStartDate > jquery(".dateIndicator:nth-of-type(2)").html()) {
+	if (newStartDate > document.querySelector(".dateIndicator:nth-of-type(2)").innerHTML) {
 			throw("Start date cannot be before end date!");
 	} else {
-			jquery(".dateIndicator:nth-of-type(1)").html(newStartDate);
+			document.querySelector(".dateIndicator:nth-of-type(1)").innerHTML = newStartDate;
 			// Mise à jour des options de la timeline, puis on la redessine
 			option.min = newStartDate;
 			timeline.setOptions(option);
@@ -308,10 +307,10 @@ function changeStartDate(newStartDate) {
 }
 
 function changeEndDate(newEndDate) {
-	if (jquery(".dateIndicator:nth-of-type(1)").html() > newEndDate) {
+	if (document.querySelector(".dateIndicator:nth-of-type(1)").innerHTML > newEndDate) {
 			throw("Start date cannot be before end date!");
 	} else {
-			jquery('.dateIndicator:nth-of-type(2)').html(newEndDate);
+			document.querySelector('.dateIndicator:nth-of-type(2)').innerHTML = newEndDate;
 			// Mise à jour des options de la timeline, puis on la redessine
 			option.max = newEndDate;
 			timeline.setOptions(option);
@@ -358,7 +357,7 @@ function updateLineName(newLineName) {
 }
 
 function addEvent(title, startDate, endDate, desc, color) {
-	console.log('@lineBeingEdited: ', lineBeingEdited);
+	console.log('@addEvent lineBeingEdited: ', lineBeingEdited);
 	
 	let groupID = lineBeingEdited.id;
 	console.log('@groupID: ', groupID);
@@ -381,8 +380,8 @@ function addEvent(title, startDate, endDate, desc, color) {
 					changesSaved.set(false);
 					// closeModal("modalAddEvent")
 			} else if (isValidDate(endDate)) {
-					if (jquery("#datePickerStart").val() > jquery("#datePickerEnd").val()) {
-							jquery("#modalAddEvent p:last-of-type").html("Start date cannot be before end date!");
+					if (document.querySelector("#datePickerStart").value > document.querySelector("#datePickerEnd").value) {
+							throw("Start date cannot be before end date!");
 					} else {
 							item.add({
 									id: itemIDCount,
@@ -414,7 +413,7 @@ function editEvent(title, startDate, endDate, color) {
 							id: editedItemID,
 							type: "point",
 							name: title,
-							description: jquery("#editedEventDescription").val(),
+							description: document.querySelector("#editedEventDescription").value,
 							"className": color,
 							start: startDate,
 							end: null
@@ -431,7 +430,7 @@ function editEvent(title, startDate, endDate, color) {
 									id: editedItemID,
 									type: "range",
 									name: title,
-									description: jquery("#editedEventDescription").val(),
+									description: document.querySelector("#editedEventDescription").value,
 									"className": color,
 									start: startDate,
 									end: endDate
@@ -502,9 +501,9 @@ function exportTimeline() {
 		version: 1.0,
 		description: get(description),
 		name: currentTitle,
-		public: !(jquery("#checkBoxPrivate").is(":checked")),
-		start_date: jquery(".dateIndicator:nth-of-type(1)").html(),
-		end_date: jquery(".dateIndicator:nth-of-type(2)").html()
+		// public: !(jquery("#checkBoxPrivate").is(":checked")),
+		start_date: document.querySelector(".dateIndicator:nth-of-type(1)").innerHTML,
+		end_date: document.querySelector(".dateIndicator:nth-of-type(2)").innerHTML
 	};
 
 	// Créer un tableau qui contient toutes les lignes

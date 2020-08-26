@@ -1,6 +1,5 @@
 <script>
   import TheTimeline from '../TheTimeline.js';
-  import jquery from "jquery";
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
   let errorMessage = "";

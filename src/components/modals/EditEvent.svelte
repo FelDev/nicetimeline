@@ -1,15 +1,14 @@
 <script>
   import TheTimeline from '../TheTimeline.js';
-  import jquery from "jquery";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   let errorMessage = "";
 
   function editEvent() {
-    let title = jquery("#editedEventTitle").val();
-    let startDate = jquery("#editedEventDatePickerStart").val();
-    let endDate = jquery("#editedEventDatePickerEnd").val();
-    let color = jquery("#editedEventColor").val();
+    let title = document.getElementById("editedEventTitle").value;
+    let startDate = document.getElementById("editedEventDatePickerStart").value;
+    let endDate = document.getElementById("editedEventDatePickerEnd").value;
+    let color = document.getElementById("editedEventColor").value;
     try {
         TheTimeline.editEvent(title, startDate, endDate, color);
         dispatch('closeThisModal')

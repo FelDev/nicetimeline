@@ -87,7 +87,6 @@
 <script>
   import PageTransition from "../components/PageTransition.svelte";
   import { onMount } from "svelte";
-  import jquery from "jquery";
   import { Timeline } from "vis-timeline/standalone";
   // import moment from "moment";
   import dateformatchecker from "../components/DateFormatChecker.svelte"
