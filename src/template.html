@@ -28,10 +28,12 @@
 		src="https://identity.netlify.com/v1/netlify-identity-widget.js"
 	></script>
 </head>
-<body id='sapper'>
+<body>
 	<!-- The application will be rendered inside this element,
 	     because `src/client.js` references it -->
-	%sapper.html%
+	<div id='sapper'>
+		%sapper.html%
+	</div>
 	<!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->
