@@ -22,9 +22,17 @@
     updateUserInfo(user);
   };
   onMount(async () => {
-    netlifyIdentity.on('init', handleUserStateChange);
+    netlifyIdentity.on('init', handleUserStateChange(netlifyIdentity.currentUser()));
     netlifyIdentity.on('login', handleUserStateChange);
     netlifyIdentity.on('logout', handleUserStateChange);
+    
+    netlifyIdentity.on('open', () => document.addEventListener("keyup", closeModalWithEsc));
+    netlifyIdentity.on('close', () => document.removeEventListener("keyup", closeModalWithEsc));
+    function closeModalWithEsc(e) {
+			if (e.key == "Escape" || e.keyCode == 27) {
+        netlifyIdentity.close();
+			}
+    }
   })
 </script>
 
