@@ -27,7 +27,7 @@
 <div id="modalAddLine" title="Add a line" class="modal">
     <header>
         <h6>Add a line</h6>
-        <button title="close" on:click={dispatch('closeThisModal')}>
+        <button title="close" on:click={() => dispatch('closeThisModal')}>
             X
         </button>
     </header>
@@ -44,7 +44,7 @@
         <br />
         <div class="buttons">
             <button on:click={addLine}>Add line</button>
-            <button on:click={dispatch('closeThisModal')}>Cancel</button>
+            <button on:click={() => dispatch('closeThisModal')}>Cancel</button>
         </div>
     </form>
 
