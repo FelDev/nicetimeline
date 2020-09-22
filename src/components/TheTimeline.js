@@ -19,7 +19,8 @@ export default {
 	moveToFirstItem,
 	showAllLine,
 	clearTimeline,
-	exportTimeline,
+	getTimeline,
+	exportTimelineToClient,
 	showDemoTimeline,
 }
 
@@ -477,9 +478,22 @@ function clearTimeline() {
   item.clear()
 }
 
-function exportTimeline() {
-	console.log('@export...');
+function exportTimelineToClient() {
+	console.log('@exportTimelineToClient...');
+	let timelineData = getTimeline();
 	
+	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(timelineData));
+	let dlAnchorElem = document.getElementById('exportTimelineToClient');
+	dlAnchorElem.setAttribute("href", dataStr);
+	let beginningOfFileName = timelineData.name == "" ? "your_timeline" : timelineData.name;
+	const fileName = `${beginningOfFileName}_${makeValid(new Date())}.timeline`
+
+	dlAnchorElem.setAttribute("download", fileName);
+	dlAnchorElem.click();
+
+}
+
+function getTimeline() {
 	let currentTitle = get(title);
 	let allLine = [];
 	let line = {
@@ -537,16 +551,8 @@ function exportTimeline() {
 
 	console.log('@allLine: ', allLine);
 	timelineGeneral.line = allLine;
-
-	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(timelineGeneral));
-	let dlAnchorElem = document.getElementById('exportTimeline');
-	dlAnchorElem.setAttribute("href", dataStr);
-	let beginningOfFileName = currentTitle == "" ? "your_timeline" : currentTitle;
-	const fileName = `${beginningOfFileName}_${makeValid(new Date())}.timeline`
-
-	dlAnchorElem.setAttribute("download", fileName);
-	dlAnchorElem.click();
-
+	
+	return timelineGeneral;
 }
 
 function showDemoTimeline() {

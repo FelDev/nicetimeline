@@ -75,7 +75,7 @@
         </p>
         <!-- <input type="file"> -->
     </div>
-    <button on:click={TheTimeline.exportTimeline}>Export timeline</button>
-    <a id="exportTimeline" style="display: none;">Export timeline</a>
+    <button on:click={TheTimeline.exportTimelineToClient}>Export timeline</button>
+    <a id="exportTimelineToClient" style="display: none;">Export timeline</a>
 
 </nav>
