@@ -1,21 +1,57 @@
 <script context="module"> 
   import TheTimeline from './TheTimeline.js';
+  // import {showModal} from './modals/ModalsCommon.svelte'
   
-  // #RENDU ICI!!!
-  export function saveTimeline(token) {
+  export async function saveTimeline(token) {
     let timelineData = TheTimeline.getTimeline();
     
-    fetch('/.netlify/functions/save-timeline', {
+    const response = await fetch('/.netlify/functions/save-timeline', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ timelineData: timelineData }),
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('@data: ', data);
-      TheTimeline.setTimelineID(data.id);
-    });
+    const data = await response.json();
+    console.log('@data: ', data);
+
+    TheTimeline.setTimelineID(data.id);
+    // #TODO: success message
+  }
+
+  export async function loadTimelines(token) {
+    const response = await fetch('/.netlify/functions/load-timelines', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    const data = await response.json();
+    console.log('@data: ', data);
+    
+    return data.ids.data
+  }
+
+  export async function loadTimeline(timelineID) {
+    console.log('@timelineID: ', timelineID);
+    let token;
+    try {
+      token = await netlifyIdentity.currentUser().jwt(true);
+    } catch (err) {
+      token = false;
+    }
+    const response = await fetch('/.netlify/functions/load-timeline', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ timelineID: timelineID })
+    })
+    const data = await response.json();
+    console.log('@data: ', data);
+    
+    data.timeline.lines = JSON.parse(data.timeline.lines); // because the JSON for lines is just stringified without much fanciness in the DB
+    TheTimeline.loadTimeline(data.timeline)
+    return data.timeline
   }
 </script>

@@ -69,6 +69,7 @@
 
   </main>
 
+  <ModalLoadTimeline on:closeThisModal={() => closeModal('modalLoadTimeline')}/>
   <ModalStartDate on:closeThisModal={() => closeModal('modalChangeStartDate')}/>
   <ModalEndDate on:closeThisModal={() => closeModal('modalChangeEndDate')}/>
   <ModalHelp on:closeThisModal={() => closeModal('modalHelp')}/>
@@ -94,8 +95,9 @@
   import Auth from "../components/Auth.svelte";
   import Title from "../components/Title.svelte";
   import Description from "../components/Description.svelte";
-  import ModalEndDate from "../components/modals/EndDate.svelte";
+  import ModalLoadTimeline from "../components/modals/LoadTimeline.svelte";
   import ModalStartDate from "../components/modals/StartDate.svelte";
+  import ModalEndDate from "../components/modals/EndDate.svelte";
   import ModalEditEvent from "../components/modals/EditEvent.svelte";
   import ModalHelp from "../components/modals/Help.svelte";
   import ModalAddEvent from "../components/modals/AddEvent.svelte";
