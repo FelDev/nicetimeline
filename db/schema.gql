@@ -1,9 +1,30 @@
 type User {
-  netlifyID: ID!
-  stripeID: ID!
+  netlifyID: ID @unique
+  stripeID: ID @unique
+  paidFor: Int
+  timelines: [Timeline] @relation
+}
+
+type Timeline {
+  user: User
+  version: String
+  description: String
+  name: String
+  public: Boolean
+  start_date: String
+  end_date: String
+  lines: String # Just passing a huge JSON for the moment. Could be more elegant but I need to ship it more than polish it.
 }
 
 type Query {
   getUserByNetlifyID(netlifyID: ID!): User!
   getUserByStripeID(stripeID: ID!): User!
+  getAllUsers: [User!]
+  # addTimelineToUser()
 }
+
+
+# Need to use custom resolvers with FaunaDB...
+# type Mutation {
+#   modi(netlifyID: ID paidFor: Int):User
+# }
