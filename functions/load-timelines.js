@@ -27,6 +27,7 @@ exports.handler = async (event, context) => {
   });
 
   console.log('@faunaData: ', faunaData);
+  
   if (faunaData.errors) {
     return {
       statusCode: 500,
@@ -35,6 +36,7 @@ exports.handler = async (event, context) => {
       ),
     };  
   }
+  
   return {
     statusCode: 200,
     body: JSON.stringify({

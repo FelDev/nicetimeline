@@ -5,7 +5,7 @@
 
 <div id="modalInfoItem" title="" class="modal">
     <header>
-        <h6 />
+        <h6>...</h6>
         <button title="close" on:click={() => dispatch('closeThisModal')}>
             X
         </button>
