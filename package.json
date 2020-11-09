@@ -13,14 +13,13 @@
   },
   "dependencies": {
     "compression": "^1.7.1",
-    "magic-sdk": "^2.0.2",
     "moment": "^2.27.0",
-    "node-fetch": "^2.6.0",
-    "pikaday": "^1.8.0",
+    "node-fetch": "^2.6.1",
+    "pikaday": "^1.8.2",
     "polka": "next",
     "sirv": "^0.4.0",
-    "stripe": "^8.89.0",
-    "vis-timeline": "^7.3.7"
+    "stripe": "^8.120.0",
+    "vis-timeline": "^7.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
