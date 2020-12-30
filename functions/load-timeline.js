@@ -46,6 +46,15 @@ exports.handler = async (event, context) => {
       ),
     };
   }
+  if (faunaData.data.findTimelineByID == null) {
+    // This if block should be executed if the timeline requested is not found. Very edge case.
+    return {
+      statusCode: 404,
+      body: JSON.stringify({
+        error: "timeline not found."
+      }),
+    };
+  }
   if (faunaData.errors) {
     return {
       statusCode: 500,
@@ -54,6 +63,7 @@ exports.handler = async (event, context) => {
       ),
     };  
   }
+
   return {
     statusCode: 200,
     body: JSON.stringify({

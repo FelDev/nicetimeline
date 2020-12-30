@@ -12,7 +12,7 @@
 <PageTransition>
 
 	{#if isLoggedIn}
-    <h1>You should be logged in, motherfucker</h1>
+    <h1>You should be logged in, mon chum.</h1>
     <h1>Current user: {userEmail}</h1>
     <button onclick="handleLogout()">Logout</button>
   {:else} 

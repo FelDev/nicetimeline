@@ -1,66 +1,7 @@
 <style>
-  h1 {
-    font-size: 4.5rem;
-    margin-left: 5vw;
-  }
-
-  h2 {
-    color: #fafafa;
-    font-size: 4.2rem;
-    text-align: center;
-  }
-  .one {
-    background: linear-gradient(0deg, #0000dd7d, #e7ffff);
-    background: linear-gradient(0deg, #333, #2b3340);
-  }
-  .two {
-    background: linear-gradient(0deg, red, #0000dd7d);
-    background: linear-gradient(0deg, #111, #333);
-    background: linear-gradient(0deg, #2b3340, #323442);
-  }
-  .three {
-    background: linear-gradient(0deg, #0000dd7d, #ff0000);
-    background: linear-gradient(0deg, #323442, #111);
-  }
-  section {
-    margin: 0 auto;
-    padding: 10rem 0.5rem;
-    text-align: center;
-    max-width: 75rem;
-    color: #fafafa;
-  }
-  
-  section a {
-    color: #fafafa;
-  }
-
-  section a.btn-link {
-    background-color: rgba(60, 209, 15, .75);
-    border-radius: 5px;
-    font-family: fallingSky;
-    font-size: 2.5rem;
-    padding: 1rem 2rem;
+  h1 a {
     text-decoration: none;
-    margin: 2rem;
-    display: inline-block;
-  }
-
-  details {
-    color: #fafafa;
-    text-align: center;
-    font-size: 2.2rem;
-    cursor: pointer;
-  }
-  summary:not(:focus-visible) {
-    outline:none;
-  }
-  #timeline {
-    margin: 0 2.5rem;
-  }
-
-  ul {
-    text-align: left;
-    font-size: 2.2rem;
+    color: unset;
   }
 </style>
 
@@ -81,32 +22,42 @@
   <!-- <script src="js/dateformatchecker.js"></script> -->
 </svelte:head>
 
-<!-- #TODO: page transitions, state of the app is hard to work with when doing the fancy transition. -->
 <!-- <PageTransition> -->
   
   <header>
-    <h1>Simple Timeline</h1>
-  </header>
-  <main>
-    <div class="one">
-      <section>
-        <h2>A Place to Remember Your Life's Important Periods and Events.</h2>
-        <p>As years become decades, we think of our past and realize we forgot dates, places, even people.</p>
-        <p>Simple Timeline is a place to keep track of the big picture.</p>
-        <p>A tool for reflection.</p>
-        <a href="/app" class="btn-link">Try Now - no sign up needed</a>
-        <p>or</p>
-        <a href="/app?login" class="btn-link">Login</a>
-      </section>
+    <h1 title="A tool to visualize the passing of time">
+      <a href="/">Simple Timeline</a>
+    </h1>
+    <Title/>
+    <Auth/>
+    <div>
+      <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
+      <button id="btnShare">Partager</button>
+      <form action="account.php" method="GET">
+        <button name="action">Déconnexion</button>
+      </form> -->
     </div>
-    <div class="two">
-    <h2>Demo Timeline 👇 </h2>
-    <details>
-      <summary>Tips</summary>
-      <p><strong>Zoom</strong> by pinching or by holding down ctrl and scrolling.</p>
-      <p><strong>See an events detail</strong> by double clicking it.</p>
-      <p><strong>Edit an event</strong> by right clicking it, or drag them around.</p>
-    </details>
+  </header>
+  <Nav/>
+  <main>
+    <div id="descAndDatePickers">
+      <button 
+        class="dateIndicator" 
+        title="Change the timeline's Start Date"
+        on:click={() => showModal("modalChangeStartDate")}
+      >
+        01-01-2000
+      </button>
+      <Description />
+      <button 
+        class="dateIndicator" 
+        title="Change the timeline's End Date"
+        on:click={() => showModal("modalChangeEndDate")}
+      >
+        31-12-2099
+      </button>    
+    </div>
+
     <div id="btnContainer">
       <div>
         <button id="btnAddLine" on:click={() => showModal('modalAddLine')}>Add a line</button>
@@ -120,23 +71,7 @@
 
     <!-- Le plus important des div!!! -->
     <div id="timeline" oncontextmenu="return false;"></div>
-    </div>
-    <div class="three">
-      <section>
-        <h2>Features</h2>
-        <ul>
-          <li><strong>Free</strong> -
-            No catch; this is a hobby project. <a target="_blank" rel="noopener" href="https://ko-fi.com/feldev">Donations </a> are welcome but not mandatory.
-          </li>
-          <li><strong>Private</strong> - 
-            Your data is never sold or consulted. You can even use Simple Timeline without creating an account, without wifi, and save your data locally.
-          </li>
-          <li><strong>Open source</strong> - 
-            This project is based on other open source projects, it only makes sense for it to be open as well.
-          </li>
-        </ul>
-      </section>
-    </div>
+
   </main>
 
   <ModalLoadTimeline on:closeThisModal={() => closeModal('modalLoadTimeline')}/>
@@ -175,6 +110,7 @@
   import ModalRemoveLine from "../components/modals/RemoveLine.svelte";
   import ModalAddLine from "../components/modals/AddLine.svelte";
   import ModalInfoItem from "../components/modals/InfoItem.svelte";
+  import Nav from "../components/Nav.svelte";
   import {description, title, changesSaved} from '../components/TheTimeline.js';
   import TheTimeline from "../components/TheTimeline.js"
   import {showModal, closeModal} from '../components/modals/ModalsCommon.svelte'
@@ -188,22 +124,21 @@
     TheTimeline.showDemoTimeline();
     
     let datePickersIDs = [
-        'datePickerStart',
-        'datePickerEnd',
-        "editedEventDatePickerStart",
-        "editedEventDatePickerEnd",
-        "datePickerTimelineStart",
-        "datePickerTimelineEnd"
+      'datePickerStart',
+      'datePickerEnd',
+      "editedEventDatePickerStart",
+      "editedEventDatePickerEnd",
+      "datePickerTimelineStart",
+      "datePickerTimelineEnd"
     ]
 
     datePickersIDs.forEach(dpID => {
-        new Pikaday({
-            field: document.getElementById(dpID),
-            format: "YYYY-MM-DD",
-            yearRange: 100, // #TODO: should be set to [timeline's start date, timeline's end date]
-            theme: "dark-theme"
-
-        });
+      new Pikaday({
+        field: document.getElementById(dpID),
+        format: "YYYY-MM-DD",
+        yearRange: 100, // #TODO: should be set to [timeline's start date, timeline's end date]
+        theme: "dark-theme"
+      });
     });
     
     
