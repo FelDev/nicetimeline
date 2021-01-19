@@ -52,6 +52,7 @@
     
     data.timeline.lines = JSON.parse(data.timeline.lines); // because the JSON for lines is just stringified without much fanciness in the DB
     TheTimeline.loadTimeline(data.timeline)
+    TheTimeline.setTimelineID(data.timeline._id);
     return closeModal('modalLoadTimeline');
   }
 </script>
