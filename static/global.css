@@ -29,6 +29,12 @@ code {
 	border-radius: 2px;
 }
 
+#sapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
 @media (min-width: 400px) {
 	body {
 		font-size: 16px;

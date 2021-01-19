@@ -544,7 +544,7 @@ button {
 }
 
 #btnContainer div button {
-  margin-right: 5px
+  margin: 0.5rem;
 }
 
 #description {
@@ -708,10 +708,10 @@ h2:active {
 header {
   border-bottom: 2px solid black;
   background-color: #ede7f4;
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   min-height: 7rem;
-  font-size: 1.6rem
+  font-size: 1.6rem */
 }
 
 header * {

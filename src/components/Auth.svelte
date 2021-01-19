@@ -52,15 +52,32 @@
         netlifyIdentity.close();
 			}
     }
+    if (document.location.href.includes('?login')) {
+      login();
+    }
   })
   
 </script>
+
+<style>
+  div { 
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  button { 
+    height: 100%;
+  }
+</style>
+
 <!-- {loggedIn} -->
-{#if loggedIn}
-  <button id="logout" on:click={logout}>Log out</button>
-  <button id="save" on:click={save}>Save</button>
-  <button id="load" on:click={load}>Load Timeline</button>
-{:else}
-  <button id="login"  on:click={login}>Log in</button>
-  <button id="signup" on:click={signup}>Signup</button>
-{/if}
+<div>
+  {#if loggedIn}
+    <button id="save" on:click={save}>Save</button>
+    <button id="load" on:click={load}>Load</button>
+    <button id="logout" on:click={logout}>Log out</button>
+  {:else}
+    <button id="login"  on:click={login}>Log in</button>
+    <button id="signup" on:click={signup}>Signup</button>
+  {/if}
+</div>

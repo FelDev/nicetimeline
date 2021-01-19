@@ -3,6 +3,21 @@
     text-decoration: none;
     color: unset;
   }
+
+  :global(.max-width-wrapper) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 7rem;
+    max-width: 150rem;
+    margin: auto;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 500px) {
+    :global(.max-width-wrapper) {
+      justify-content: center;
+    }
+  }
 </style>
 
 <svelte:head>
@@ -25,17 +40,19 @@
 <!-- <PageTransition> -->
   
   <header>
-    <h1 title="A tool to visualize the passing of time">
-      <a href="/">Simple Timeline</a>
-    </h1>
-    <Title/>
-    <Auth/>
-    <div>
-      <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
-      <button id="btnShare">Partager</button>
-      <form action="account.php" method="GET">
-        <button name="action">Déconnexion</button>
-      </form> -->
+    <div class="max-width-wrapper">
+      <h1 title="A tool to visualize the passing of time">
+        <a href="/">Simple Timeline</a>
+      </h1>
+      <Title/>
+      <Auth/>
+      <!-- <div> -->
+        <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
+          <button id="btnShare">Partager</button>
+          <form action="account.php" method="GET">
+            <button name="action">Déconnexion</button>
+          </form> -->
+          <!-- </div> -->
     </div>
   </header>
   <Nav/>

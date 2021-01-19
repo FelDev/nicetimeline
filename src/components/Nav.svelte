@@ -45,7 +45,10 @@
 </script>
 
 <style>
-
+  button {
+    width: 100%;
+    max-width: 23rem;
+  }
 </style>
 
 <nav>
@@ -59,23 +62,23 @@
   <a href="account.php">
       Gestion du compte
   </a> -->
-
-  <button on:click={TheTimeline.showDemoTimeline}>Show demo timeline</button>
-  <button on:click={startNewTimeline}>New timeline</button>
-  <button on:click={toggleImporter}>Import timeline</button>
-  <div
-    id="drop_zone"
-    on:drop={(e)=>dropHandler(e)}
-    on:dragover={(e) => dragOverHandler(e)}>
-    <button on:click={toggleImporter}>x</button>
-    <p>
-      Drag and drop a .timeline file here
-      <br />
-      (This will replace the current timeline)
-    </p>
-    <!-- <input type="file"> -->
+  <div class="max-width-wrapper">
+    <button on:click={TheTimeline.showDemoTimeline}>Show demo timeline</button>
+    <button on:click={startNewTimeline}>New timeline</button>
+    <button on:click={toggleImporter}>Import local file</button>
+    <div
+      id="drop_zone"
+      on:drop={(e)=>dropHandler(e)}
+      on:dragover={(e) => dragOverHandler(e)}>
+      <button on:click={toggleImporter}>x</button>
+      <p>
+        Drag and drop a .timeline file here
+        <br />
+        (This will replace the current timeline)
+      </p>
+      <!-- <input type="file"> -->
+    </div>
+    <button on:click={TheTimeline.exportTimelineToClient}>Export locally</button>
+    <a id="exportTimelineToClient" style="display: none;">Export locally</a>
   </div>
-  <button on:click={TheTimeline.exportTimelineToClient}>Export timeline</button>
-  <a id="exportTimelineToClient" style="display: none;">Export timeline</a>
-
 </nav>
