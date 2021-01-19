@@ -1,6 +1,6 @@
 <script context="module"> 
   import TheTimeline from './TheTimeline.js';
-  // import {showModal} from './modals/ModalsCommon.svelte'
+  import {closeModal} from './modals/ModalsCommon.svelte'
   
   export async function saveTimeline(token) {
     let timelineData = TheTimeline.getTimeline();
@@ -52,6 +52,6 @@
     
     data.timeline.lines = JSON.parse(data.timeline.lines); // because the JSON for lines is just stringified without much fanciness in the DB
     TheTimeline.loadTimeline(data.timeline)
-    return data.timeline
+    return closeModal('modalLoadTimeline');
   }
 </script>

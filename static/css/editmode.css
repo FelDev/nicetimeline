@@ -779,6 +779,8 @@ p {
   display: flex;
   align-items: center;
   transition: 1s;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #drop_zone button {
