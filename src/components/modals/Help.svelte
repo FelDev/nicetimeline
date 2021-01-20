@@ -13,41 +13,20 @@
     The goal of this webapp is to help you visualize the passing of time.
     I use it to visualize my life, but you could make a timeline about anything.
   </p>
+  <h2>Where is my data going?</h2>
   <p>
     Your data stays yours 100%.
-    In fact, you'll have to download and store the data yourself if you want to save a timeline.
-    There's no database behind this.
+    You can even choose to download and store the data yourself without creating an account.
+    To do so, use the "Export locally" and "Import local file" buttons.
   </p>
-  <details>
-    <summary>Why have users exporting and importing files? </summary>
-    <p>
-      I chose that way of saving timelines rather than a classic account creation flow for <span class="bold">maximal privacy</span>.
-    </p>
-    <p>
-      The first version of this webapp had users creating accounts and saving their data to a database, but
-      virtually 100% of people had the same concern: "Won't you be able to see my timeline?". Indeed, I can hack my
-      own websites quite easily.
-    </p>
-    <p>
-      At first I thought about adding client-side encryption, but, for users, that's about as complex and
-      inconvenient as keeping files. Also, to be really sure that I actually implement that encryption, users would
-      have to look through the code.
-    </p>
-    <p>
-      With export/import of a simple .json file, you can turn your internet connection off and disable all cookies
-      while using the app. It still works and nobody, not even me, <span class="bold">can</span> peek at your data.
-    </p>
-    <p>
-      On top of it, no user management and no database makes this webapp much simpler to develop and much cheaper to
-      host. (So cheap, this is free to use. (But you can <a target="_blank" rel="noopener"
-        href="https://ko-fi.com/feldev">make a donation</a> if you want, much appreciated!
-      <!-- (And you might be on the shoutout page, if you choose to.) -->))
-    </p>
-    <p>
-      If you would enjoy the ability to create an account and save your data on the cloud, do <a target="_blank"
-        rel="noopener" href="https://www.felixparadis.com/contact/">send a feature request</a>!
-    </p>
-  </details>
+  <p>
+    If you choose to manage your data yourself, you can even turn your internet connection off while using the app.
+    Nobody, not even me, <span class="bold">can</span> peek at your data.
+  </p>
+  <p>
+    Personally, I prefer to keep my data in the cloud because it's so easy to lose a file. 
+  </p>
+  
   <h2>Tips and tricks:</h2>
   <p>
     <span class="push-left">- To zoom in and out: <br> </span>
@@ -75,11 +54,11 @@
   </p>
   <p>
     <span class="push-left">- To save your timeline: <br> </span>
-    Click "Export timeline" and keep the file somewhere safe.
+    Click "Export timeline" and keep the file somewhere safe. Or login and click "save".
   </p>
   <p>
-    <span class="push-left">- To load a saved timeline: <br> </span>
-    Click "Import timeline" and drag and drop the file you previously exported.
+    <span class="push-left">- To load a timeline: <br> </span>
+    Click "Import local file" and drag and drop the file you previously exported. Or login and click "load"
   </p>
   <!-- <p>
     <span class="push-left">- : <br> </span>

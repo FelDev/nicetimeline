@@ -104,7 +104,7 @@
     <details>
       <summary>Tips</summary>
       <p><strong>Zoom</strong> by pinching or by holding down ctrl and scrolling.</p>
-      <p><strong>See an events detail</strong> by double clicking it.</p>
+      <p><strong>See an event's details</strong> by double clicking it.</p>
       <p><strong>Edit an event</strong> by right clicking it, or drag them around.</p>
     </details>
     <div id="btnContainer">
@@ -158,13 +158,7 @@
 <script>
   // import PageTransition from "../components/PageTransition.svelte";
   import { onMount } from "svelte";
-  import { Timeline } from "vis-timeline/standalone";
-  // import moment from "moment";
-  import dateformatchecker from "../components/DateFormatChecker.svelte"
   import Footer from "../components/Footer.svelte";
-  import Auth from "../components/Auth.svelte";
-  import Title from "../components/Title.svelte";
-  import Description from "../components/Description.svelte";
   import ModalLoadTimeline from "../components/modals/LoadTimeline.svelte";
   import ModalStartDate from "../components/modals/StartDate.svelte";
   import ModalEndDate from "../components/modals/EndDate.svelte";
@@ -175,7 +169,6 @@
   import ModalRemoveLine from "../components/modals/RemoveLine.svelte";
   import ModalAddLine from "../components/modals/AddLine.svelte";
   import ModalInfoItem from "../components/modals/InfoItem.svelte";
-  import {description, title, changesSaved} from '../components/TheTimeline.js';
   import TheTimeline from "../components/TheTimeline.js"
   import {showModal, closeModal} from '../components/modals/ModalsCommon.svelte'
 

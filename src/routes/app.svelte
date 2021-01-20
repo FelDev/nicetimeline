@@ -100,8 +100,7 @@
   <ModalEditEvent on:closeThisModal={() => closeModal('modalEditEvent')}/>
   <ModalRemoveLine on:closeThisModal={() => closeModal('modalRemoveLine')}/>
   <ModalInfoItem on:closeThisModal={() => closeModal('modalInfoItem')}/>
-  <ModalEditLine on:closeThisModal={() => closeModal('modalEditLine')}
-    on:showModal={(event) => showModal(event.detail.modalId)}/>
+  <ModalEditLine on:closeThisModal={() => closeModal('modalEditLine')}/>  <!-- #DELETE: This used to be there: on:showModal={(event) => showModal(event.detail.modalId)} -->
 
   <Footer/>
 

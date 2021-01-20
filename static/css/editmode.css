@@ -114,11 +114,12 @@ textarea {
   align-items: center;
   border-bottom: 0.2em solid #2b8aee;
   min-height: 0; 
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal header h6 {
   font-size: 3rem;
-  
 }
 
 .modal form {
