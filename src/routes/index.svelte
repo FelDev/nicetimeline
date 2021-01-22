@@ -129,7 +129,7 @@
             No catch; this is a hobby project. <a target="_blank" rel="noopener" href="https://ko-fi.com/feldev">Donations </a> are welcome but not mandatory.
           </li>
           <li><strong>Private</strong> - 
-            Your data is never sold or consulted. You can even use Simple Timeline without creating an account, without wifi, and save your data locally.
+            Your data is never sold or consulted. You can even use Simple Timeline without creating an account and save your data locally.
           </li>
           <li><strong>Open source</strong> - 
             This project is based on other open source projects, it only makes sense for it to be open as well.

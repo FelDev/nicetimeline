@@ -32,4 +32,7 @@
   li { 
     margin: 2rem;
   }
+  ul + button {
+    margin: 0 3rem 3rem;
+  }
 </style>
