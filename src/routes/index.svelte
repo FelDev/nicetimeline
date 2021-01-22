@@ -64,23 +64,6 @@
   }
 </style>
 
-<svelte:head>
-  <script type="text/javascript">
-    if (top != self) top.location.replace(self.location.href); 
-  </script>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Free timeline creation tool to visualize the passing of time.">
-  <title>Simple Timeline</title>
-  <link rel="shortcut icon" href="image/favicon.ico">
-  <!-- <link href="css/librairies/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" /> -->
-  <link rel="stylesheet" type="text/css" href="css/editmode.css" />
-  <!-- <script src="js/librairies/vis-timeline-graph2d.min.js"></script> -->
-  <!-- <script src="js/dateformatchecker.js"></script> -->
-</svelte:head>
-
 <!-- #TODO: page transitions, state of the app is hard to work with when doing the fancy transition. -->
 <!-- <PageTransition> -->
   

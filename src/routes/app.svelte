@@ -20,23 +20,6 @@
   }
 </style>
 
-<svelte:head>
-  <script type="text/javascript">
-    if (top != self) top.location.replace(self.location.href); 
-  </script>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Free timeline creation tool to visualize the passing of time.">
-  <title>Simple Timeline</title>
-  <link rel="shortcut icon" href="image/favicon.ico">
-  <!-- <link href="css/librairies/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" /> -->
-  <link rel="stylesheet" type="text/css" href="css/editmode.css" />
-  <!-- <script src="js/librairies/vis-timeline-graph2d.min.js"></script> -->
-  <!-- <script src="js/dateformatchecker.js"></script> -->
-</svelte:head>
-
 <!-- <PageTransition> -->
   
   <header>
@@ -109,9 +92,7 @@
 <script>
   // import PageTransition from "../components/PageTransition.svelte";
   import { onMount } from "svelte";
-  import { Timeline } from "vis-timeline/standalone";
   // import moment from "moment";
-  import dateformatchecker from "../components/DateFormatChecker.svelte"
   import Footer from "../components/Footer.svelte";
   import Auth from "../components/Auth.svelte";
   import Title from "../components/Title.svelte";
@@ -127,7 +108,7 @@
   import ModalAddLine from "../components/modals/AddLine.svelte";
   import ModalInfoItem from "../components/modals/InfoItem.svelte";
   import Nav from "../components/Nav.svelte";
-  import {description, title, changesSaved} from '../components/TheTimeline.js';
+  // import {description, title, changesSaved} from '../components/TheTimeline.js';
   import TheTimeline from "../components/TheTimeline.js"
   import {showModal, closeModal} from '../components/modals/ModalsCommon.svelte'
 

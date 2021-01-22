@@ -33,7 +33,7 @@
         </p>
         <p>
             <label for="editedEventDescription">Description:</label>
-            <textarea type="text" id="editedEventDescription" />
+            <textarea id="editedEventDescription" />
         </p>
         <p>
             <label for="editedEventColor">Color:</label>

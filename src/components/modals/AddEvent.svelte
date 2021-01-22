@@ -46,7 +46,7 @@
       </p>
       <p>
         <label for="newEventDesc"> Description: </label>
-        <textarea type="text" id="newEventDesc" placeholder="(optional)" bind:value={desc}></textarea>
+        <textarea id="newEventDesc" placeholder="(optional)" bind:value={desc}></textarea>
       </p>
       <p>
         <label for="newEventColor"> Color: </label>
