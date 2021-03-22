@@ -88,7 +88,7 @@
   <Footer/>
 
 <!-- </PageTransition> -->
-
+<img src="https://app.piratepx.com/ship?p=e9814aae-7a7e-4d9f-85e5-a5a22c3ee4d5&i=%2fapp" alt="" style="display:none;"/> <!-- '%2f' == '/' -->
 <script>
   // import PageTransition from "../components/PageTransition.svelte";
   import { onMount } from "svelte";
