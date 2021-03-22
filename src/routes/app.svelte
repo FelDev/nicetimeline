@@ -20,8 +20,11 @@
   }
 </style>
 
+<svelte:head>
+  <link rel="canonical" href="https://www.simple-timeline.com/"/>
+</svelte:head>
+
 <!-- <PageTransition> -->
-  
   <header>
     <div class="max-width-wrapper">
       <h1 title="A tool to visualize the passing of time">
