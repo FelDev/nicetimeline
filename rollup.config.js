@@ -27,9 +27,11 @@ export default {
 				preventAssignment: true,
 			}),
 			svelte({
-				dev,
-				hydratable: true,
-				emitCss: true
+				emitCss: true,
+				compilerOptions: {
+					dev,
+					hydratable: true,
+				}
 			}),
 			resolve({
 				browser: true,
@@ -73,8 +75,10 @@ export default {
 				preventAssignment: true,
 			}),
 			svelte({
-				generate: 'ssr',
-				dev
+				compilerOptions: {
+					generate: 'ssr',
+					dev
+				}
 			}),
 			resolve({
 				dedupe: ['svelte']
