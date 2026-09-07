@@ -1,7 +1,19 @@
 <style>
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem 5vw;
+  }
+
   h1 {
     font-size: 4.5rem;
-    margin-left: 5vw;
+    margin: 0;
+  }
+
+  .header-link {
+    margin-left: auto;
   }
 
   h2 {
@@ -69,6 +81,7 @@
   
   <header>
     <h1>Simple Timeline</h1>
+    <a href="/app" class="btn-link header-link">Go to App</a>
   </header>
   <main>
     <div class="one">
@@ -110,7 +123,7 @@
             No catch; this is a hobby project. <a target="_blank" rel="noopener" href="https://ko-fi.com/feldev">Donations </a> are welcome but not mandatory.
           </li>
           <li><strong>Private</strong> - 
-            Your data is never sold or consulted. You can even use Simple Timeline without creating an account and save your data locally.
+            Your data is never sold or consulted. There is no database, Simple Timeline runs entirely in your browser. You are responsible of saving your data.
           </li>
           <li><strong>Open source</strong> - 
             This project is based on other open source projects, it only makes sense for it to be open as well.
