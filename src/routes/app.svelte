@@ -31,7 +31,6 @@
         <a href="/">Simple Timeline</a>
       </h1>
       <Title/>
-      <Auth/>
       <!-- <div> -->
         <!-- <label for="checkboxPrivate">Privée</label><input type="checkbox" id="checkBoxPrivate" />
           <button id="btnShare">Partager</button>
@@ -77,7 +76,6 @@
 
   </main>
 
-  <ModalLoadTimeline on:closeThisModal={() => closeModal('modalLoadTimeline')}/>
   <ModalStartDate on:closeThisModal={() => closeModal('modalChangeStartDate')}/>
   <ModalEndDate on:closeThisModal={() => closeModal('modalChangeEndDate')}/>
   <ModalHelp on:closeThisModal={() => closeModal('modalHelp')}/>
@@ -96,10 +94,8 @@
   import { onMount } from "svelte";
   // import moment from "moment";
   import Footer from "../components/Footer.svelte";
-  import Auth from "../components/Auth.svelte";
   import Title from "../components/Title.svelte";
   import Description from "../components/Description.svelte";
-  import ModalLoadTimeline from "../components/modals/LoadTimeline.svelte";
   import ModalStartDate from "../components/modals/StartDate.svelte";
   import ModalEndDate from "../components/modals/EndDate.svelte";
   import ModalEditEvent from "../components/modals/EditEvent.svelte";

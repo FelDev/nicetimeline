@@ -78,8 +78,6 @@
         <p>Simple Timeline is a place to keep track of the big picture.</p>
         <p>A tool for reflection.</p>
         <a href="/app" class="btn-link">Try Now - no sign up needed</a>
-        <p>or</p>
-        <a href="/app?login" class="btn-link">Login</a>
       </section>
     </div>
     <div class="two">
@@ -122,7 +120,6 @@
     </div>
   </main>
 
-  <ModalLoadTimeline on:closeThisModal={() => closeModal('modalLoadTimeline')}/>
   <ModalStartDate on:closeThisModal={() => closeModal('modalChangeStartDate')}/>
   <ModalEndDate on:closeThisModal={() => closeModal('modalChangeEndDate')}/>
   <ModalHelp on:closeThisModal={() => closeModal('modalHelp')}/>
@@ -141,7 +138,6 @@
   // import PageTransition from "../components/PageTransition.svelte";
   import { onMount } from "svelte";
   import Footer from "../components/Footer.svelte";
-  import ModalLoadTimeline from "../components/modals/LoadTimeline.svelte";
   import ModalStartDate from "../components/modals/StartDate.svelte";
   import ModalEndDate from "../components/modals/EndDate.svelte";
   import ModalEditEvent from "../components/modals/EditEvent.svelte";

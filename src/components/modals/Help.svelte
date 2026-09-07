@@ -24,7 +24,7 @@
     Nobody, not even me, <span class="bold">can</span> peek at your data.
   </p>
   <p>
-    Personally, I prefer to keep my data in the cloud because it's so easy to lose a file. 
+    The simplest and safest approach is to keep your timeline file on your own device or in a place you control.
   </p>
   
   <h2>Tips and tricks:</h2>
@@ -54,11 +54,11 @@
   </p>
   <p>
     <span class="push-left">- To save your timeline: <br> </span>
-    Click "Export timeline" and keep the file somewhere safe. Or login and click "save".
+    Click "Export locally" and keep the file somewhere safe.
   </p>
   <p>
     <span class="push-left">- To load a timeline: <br> </span>
-    Click "Import local file" and drag and drop the file you previously exported. Or login and click "load"
+    Click "Import local file" and drag and drop the file you previously exported.
   </p>
   <!-- <p>
     <span class="push-left">- : <br> </span>
